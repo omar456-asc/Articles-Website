@@ -1,0 +1,11 @@
+{
+    "name": "pc/articles-website",
+    "description": "Basic Admin Panel",
+    "license": "MCIT",
+    "autoload": {
+        "psr-4": {
+            "Pc\\ArticlesWebsite\\": "src/"
+        }
+    },
+    "require": {}
+}
