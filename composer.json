@@ -1,11 +1,18 @@
 {
-    "name": "pc/articles-website",
-    "description": "Basic Admin Panel",
-    "license": "MCIT",
-    "autoload": {
-        "psr-4": {
-            "Pc\\ArticlesWebsite\\": "src/"
-        }
+  "name": "pc/articles-website",
+  "description": "Basic Admin Panel",
+  "license": "MCIT",
+  "autoload": {
+    "psr-4": {
+      "Pc\\ArticlesWebsite\\": "src/"
     },
-    "require": {}
+    "files": [
+      "config/DBconfig.php"
+    ],
+    "classmap": [
+      "models",
+      "controllers"
+    ]
+  },
+  "require": {}
 }

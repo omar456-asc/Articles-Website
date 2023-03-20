@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitee881503070d0c7afdd4694ecc4e4aa3
 {
+    public static $files = array (
+        'cc88c44bb43cee8e04d52bf70e6fa770' => __DIR__ . '/../..' . '/config/DBconfig.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
@@ -22,6 +26,8 @@ class ComposerStaticInitee881503070d0c7afdd4694ecc4e4aa3
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'DBHandler' => __DIR__ . '/../..' . '/models/DBHandler.php',
+        'MySQLHandler' => __DIR__ . '/../..' . '/models/MySQLHandler.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
