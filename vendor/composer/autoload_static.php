@@ -29,6 +29,7 @@ class ComposerStaticInit9228bb22e28b840ae1376a6adbaa5099
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DBHandler' => __DIR__ . '/../..' . '/models/DBHandler.php',
         'MySQLHandler' => __DIR__ . '/../..' . '/models/MySQLHandler.php',
+        'UserModel' => __DIR__ . '/../..' . '/models/UserModel.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

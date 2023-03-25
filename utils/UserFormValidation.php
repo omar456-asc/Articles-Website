@@ -2,17 +2,17 @@
 require_once('./config/validationConfig.php');
 class UserFromValidation
 {
-    public $errors = [];
-    public $userName;
-    public $email;
-    public $password;
-    public $firstName;
-    public $lastName;
-    public $phoneNumber;
-    public $group;
-    public $userImg;
+    private $errors = [];
+    private $userName;
+    private $email;
+    private $password;
+    private $firstName;
+    private $lastName;
+    private $phoneNumber;
+    private $groupID;
+    private $userImg;
 
-    public function __construct($userName, $email, $password, $firstName, $lastName, $phoneNumber, $group, $userImg)
+    public function __construct($userName, $email, $password, $firstName, $lastName, $phoneNumber, $groupID, $userImg)
     {
 
         $this->userName = $userName ? $userName : "";
@@ -21,7 +21,7 @@ class UserFromValidation
         $this->firstName = $firstName ? $firstName : "";
         $this->lastName = $lastName ? $lastName : "";
         $this->phoneNumber = $phoneNumber ? $phoneNumber : "";
-        $this->group = $group ? $group : "";
+        $this->groupID = $groupID ? $groupID : "";
         $this->userImg = $userImg ? $userImg : "";
     }
 
@@ -66,10 +66,10 @@ class UserFromValidation
         }
     }
 
-    private function validate_group($group)
+    private function validate_groupID($groupID)
     {
-        if (empty($group)) {
-            array_push($this->errors, "You Should Select Group For The User");
+        if (empty($groupID)) {
+            array_push($this->errors, "You Should Select GroupID For The User");
         }
     }
     private function validate_userimage($userImg)
@@ -83,19 +83,44 @@ class UserFromValidation
             }
         }
     }
-
-    public function validate_creating_user()
+    private function validate_phonenumber($phoneNumber)
+    {
+        if (empty($phoneNumber)) {
+            array_push($this->errors, "Phone Number Cann't Be Empty");
+        }
+    }
+    private function validate_creating_user()
     {
         $this->validate_username($this->userName);
         $this->validate_email($this->email);
         $this->validate_password($this->password);
-        $this->validate_firstname($this->password);
-        $this->validate_lastname($this->password);
-        $this->validate_group($this->group);
+        $this->validate_firstname($this->firstName);
+        $this->validate_phonenumber($this->phoneNumber);
+
+        $this->validate_lastname($this->lastName);
+        $this->validate_groupID($this->groupID);
         $this->validate_userimage($this->userImg);
-
-
-
+        // return $this->;
+    }
+    public function get_errors()
+    {
+        $this->validate_creating_user();
         return $this->errors;
+    }
+
+    public function get_create_user_data()
+    {
+        if (empty($this->get_errors())) {
+            return [
+                "Username" => $this->userName,
+                "Email" => $this->email,
+                "password" => $this->password,
+                "FirstName" => $this->firstName,
+                "Phone" => $this->phoneNumber,
+                "LastName" => $this->lastName,
+                "groupID" => $this->groupID,
+                "avatar" => $this->userImg['name'],
+            ];
+        }
     }
 }

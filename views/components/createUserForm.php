@@ -1,4 +1,8 @@
 <?php
+// Get List Of Groups
+$db = new MySQLHandler("users");
+$groups = $db->select("groups", "id,name")->getAll();
+print_r($groups);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
@@ -14,7 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $userImg = $_FILES['userimg'];
 
     $validateUser = new UserFromValidation($userName, $email, $password, $firstName, $lastName, $phoneNumber, $group, $userImg);
-    $errors = $validateUser->validate_creating_user();
+    $errors = $validateUser->get_errors();
+    $UserDate = $validateUser->get_create_user_data();
+
+    $db->save($UserDate);
 }
 ?>
 
@@ -69,7 +76,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                                 </div>
                                 <div class=" input-group input-group-outline mb-3 row">
                                     <label for="group" class="m-auto col-md-3 ">Group : </label>
-                                    <input type="text" class="form-control m-2" name="group" id="group" value="<?= HelperMethods::remember_input("group") ?>">
+                                    <select name="group" id="id" class="form-control">
+                                        <?php
+                                        foreach ($groups as $group) {
+
+                                            echo " <option value='" . $group["id"] . " '> " . $group["name"] . " </option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class=" input-group input-group-outline mb-3 row">
                                     <label for="userimg" class="m-auto col-md-3 ">User Image : : </label>
