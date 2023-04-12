@@ -90,9 +90,9 @@ class MySQLHandler implements DBHandler
         $_arr_results = array();
 
         if ($_handler_results) {
-            while ($row = mysqli_fetch_array($_handler_results, MYSQLI_ASSOC)) {
-                $_arr_results[] = array_change_key_case($row);
-            }
+            // while ($row = mysqli_fetch_array($_handler_results, MYSQLI_ASSOC)) {
+            //     $_arr_results[] = array_change_key_case($row);
+            // }
             $this->disconnect();
             return $_arr_results;
         } else {
@@ -224,6 +224,13 @@ class MySQLHandler implements DBHandler
     public function orWhere($column, $compair, $value)
     {
         $this->sql  .=  "OR `$column`$compair $value;";
+
+        return $this;
+    }
+    public function join($column, $col1, $condition, $col2)
+    {
+        $this->sql  .=  "JOIN `$column` ON  $col1 $condition $col2;";
+        // var_dump($this->sql);
 
         return $this;
     }

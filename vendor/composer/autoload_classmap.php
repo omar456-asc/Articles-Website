@@ -9,5 +9,4 @@ return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'DBHandler' => $baseDir . '/models/DBHandler.php',
     'MySQLHandler' => $baseDir . '/models/MySQLHandler.php',
-    'UserModel' => $baseDir . '/models/UserModel.php',
 );

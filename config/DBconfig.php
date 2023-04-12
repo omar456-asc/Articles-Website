@@ -5,5 +5,5 @@ define("__PORT__", "3306");
 define("__USER__", "Mahmoud_admin");
 define("__PASS__", "Admin_123");
 define("__DB__", "articlesWebsiteDb");
-define("__RECORDS_PER_PAGE__", 2);
+define("__RECORDS_PER_PAGE__", 10);
 define("__Debug__Mode__", 1);
