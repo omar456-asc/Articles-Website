@@ -7,7 +7,8 @@
       "Pc\\ArticlesWebsite\\": "src/"
     },
     "files": [
-      "config/DBconfig.php"
+      "config/DBconfig.php",
+      "utils/HelperMethods.php"
     ],
     "classmap": [
       "models",

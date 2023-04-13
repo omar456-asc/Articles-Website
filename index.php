@@ -2,15 +2,8 @@
 require_once("vendor/autoload.php");
 $db = new MySQLHandler("users");
 
-
-?>
-<!DOCTYPE html>
-<html lang="en">
-
-<?php
-require_once('views/components/header.php');
-
-require_once("views/users.php");
-
-require_once('views/components/footer.php')
-?>
+$host  = $_SERVER['HTTP_HOST'];
+$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+$extra = 'views/home.php';
+header("Location: http://$host$uri/$extra");
+// header("location:views/home.php");
