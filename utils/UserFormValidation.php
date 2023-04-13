@@ -1,5 +1,5 @@
 <?php
-require_once('./config/validationConfig.php');
+require_once('../config/validationConfig.php');
 class UserFromValidation
 {
     private $errors = [];

@@ -5,7 +5,7 @@ $groups = $db->select("groups", "id,name")->getAll();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
-    require_once('./utils/UserFormValidation.php');
+    require_once('../utils/UserFormValidation.php');
 
     $userName = $_POST['username'];
     $email = $_POST['useremail'];
@@ -48,17 +48,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                             ?>
                         </div>
                         <div class="card-body">
-                            <form role="form" action="<?= $_SERVER['PHP_SELF']; ?>" method="POST"
-                                enctype='multipart/form-data'>
+                            <form role="form" action="<?= $_SERVER['PHP_SELF']; ?>" method="POST" enctype='multipart/form-data'>
                                 <div class="input-group input-group-outline mb-3 row">
                                     <label for="username" class="m-auto col-md-3">User Name : </label>
-                                    <input type="text" class="form-control m-2" name="username" id="username"
-                                        value="<?= HelperMethods::remember_input("username") ?>">
+                                    <input type="text" class="form-control m-2" name="username" id="username" value="<?= HelperMethods::remember_input("username") ?>">
                                 </div>
                                 <div class=" input-group input-group-outline mb-3 row">
                                     <label for="useremail" class="m-auto col-md-3">Email : </label>
-                                    <input type="email" class="form-control m-2" name="useremail" id="useremail"
-                                        value="<?= HelperMethods::remember_input("useremail") ?>">
+                                    <input type="email" class="form-control m-2" name="useremail" id="useremail" value="<?= HelperMethods::remember_input("useremail") ?>">
                                 </div>
                                 <div for=" password" class="input-group input-group-outline mb-3 row">
                                     <label class="m-auto col-md-3">Password : </label>
@@ -66,18 +63,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                                 </div>
                                 <div class="input-group input-group-outline mb-3 row">
                                     <label for="firstname" class="m-auto col-md-3">First Name : </label>
-                                    <input type="text" class="form-control m-2" name="firstname" id="firstname"
-                                        value="<?= HelperMethods::remember_input("firstname") ?>">
+                                    <input type="text" class="form-control m-2" name="firstname" id="firstname" value="<?= HelperMethods::remember_input("firstname") ?>">
                                 </div>
                                 <div class=" input-group input-group-outline mb-3 row">
                                     <label for="lastname" class="m-auto col-md-3">Last Name : </label>
-                                    <input type="text" class="form-control m-2" name="lastname" id="lastname"
-                                        value="<?= HelperMethods::remember_input("lastname") ?>">
+                                    <input type="text" class="form-control m-2" name="lastname" id="lastname" value="<?= HelperMethods::remember_input("lastname") ?>">
                                 </div>
                                 <div class=" input-group input-group-outline mb-3 row">
                                     <label for="phone" class="m-auto col-md-3">Phone Number : </label>
-                                    <input type="text" class="form-control m-2" name="phone" id="phone"
-                                        value="<?= HelperMethods::remember_input("phone") ?>">
+                                    <input type="text" class="form-control m-2" name="phone" id="phone" value="<?= HelperMethods::remember_input("phone") ?>">
                                 </div>
                                 <div class=" input-group input-group-outline mb-3 row">
                                     <label for="group" class="m-auto col-md-3 ">Group : </label>
@@ -91,14 +85,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                                     </select>
                                 </div>
                                 <div class=" input-group input-group-outline mb-3 row">
-                                    <label for="userimg" class="m-auto col-md-3 ">User Image : : </label>
+                                    <label for="userimg" class="m-auto col-md-3 ">User Image : </label>
                                     <input type="file" class="form-control m-3 " name="userimg" id="userimg">
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="submit" name='submit'
-                                        class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign
-                                        Up</button>
+                                    <button type="submit" name='submit' class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Create
+                                        User</button>
                                 </div>
                             </form>
                         </div>

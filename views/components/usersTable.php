@@ -47,10 +47,6 @@ $users = $db->select('users', "*")->join('groups', 'users.GroupID', '=', "groups
                 echo "</th>";
 
 
-
-
-
-
                 echo "  </tr>";
             }
             ?>
