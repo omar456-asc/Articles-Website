@@ -3,25 +3,9 @@
 $db = new MySQLHandler("users");
 $groups = $db->select("groups", "id,name")->getAll();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+require_once('../controllers/UserController.php')
 
-    require_once('../utils/UserFormValidation.php');
 
-    $userName = $_POST['username'];
-    $email = $_POST['useremail'];
-    $password = $_POST['password'];
-    $firstName = $_POST['firstname'];
-    $lastName = $_POST['lastname'];
-    $phoneNumber = $_POST['phone'];
-    $group = $_POST['group'];
-    $userImg = $_FILES['userimg'];
-
-    $validateUser = new UserFromValidation($userName, $email, $password, $firstName, $lastName, $phoneNumber, $group, $userImg);
-    $errors = $validateUser->get_errors();
-    $UserDate = $validateUser->get_create_user_data();
-
-    $db->save($UserDate);
-}
 ?>
 
 <main class="main-content ">
