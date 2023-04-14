@@ -34,7 +34,7 @@ require_once('../controllers/UserController.php');
                 echo "<th >" . $user['name'] . "</th>";
 
                 echo "<th>";
-                echo '<a class="btn" href="" title="Edit  user ' . $user['Username'] . '">
+                echo '<a class="btn" href="../views/editUser.php?userid=' . $user['UserID'] . '" title="Edit  user ' . $user['Username'] . '">
                         <i class="fa fa-edit text-primary"></i>
                     </a>';
                 echo '<a class="btn" href="../views/users.php?action=delete&userid=' . $user['UserID'] . '" title="Delete user ' . $user['Username'] . '">

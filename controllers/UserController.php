@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $db->save($UserDate);
 }
 
-// var_dump($_GET['action']);
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
 
     $userid = intval($_GET['userid']);
@@ -43,8 +42,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
 
     $page = $_SERVER['PHP_SELF'];
 ?>
-<script type="text/javascript">
-window.location.href = '../views/users.php';
-</script>
+    <script type="text/javascript">
+        window.location.href = '../views/users.php';
+    </script>
 <?php
 }
