@@ -1,7 +1,7 @@
 <?php
-$users = $db->select('users', "*")->join('groups', 'users.GroupID', '=', "groups.id")->getALL();
-// $db->get_all_records_paginated(array(), 0);
-// var_dump($users);
+ob_start(null, 0, PHP_OUTPUT_HANDLER_STDFLAGS ^ PHP_OUTPUT_HANDLER_REMOVABLE);
+
+require_once('../controllers/UserController.php');
 ?>
 <div class="p-3">
     <table class=" table ">
@@ -34,20 +34,17 @@ $users = $db->select('users', "*")->join('groups', 'users.GroupID', '=', "groups
                 echo "<th >" . $user['name'] . "</th>";
 
                 echo "<th>";
-                echo '<a class="btn" href="">
-                        <i class="fa fa-eye text-black"></i>
-                    </a>';
-                echo '<a class="btn" href="">
+                echo '<a class="btn" href="../views/editUser.php?userid=' . $user['UserID'] . '" title="Edit  user ' . $user['Username'] . '">
                         <i class="fa fa-edit text-primary"></i>
                     </a>';
-                echo '<a class="btn" href="">
+                echo '<a class="btn" href="../views/users.php?action=delete&userid=' . $user['UserID'] . '" title="Delete user ' . $user['Username'] . '">
                         <i class="fa fa-close text-danger"></i>
                     </a>';
 
                 echo "</th>";
 
 
-                echo "  </tr>";
+                echo " </tr>";
             }
             ?>
         </tbody>
