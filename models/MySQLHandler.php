@@ -214,13 +214,19 @@ class MySQLHandler implements DBHandler
     }
     public function where($column, $compair, $value)
     {
-        $this->sql  .=  "WHERE `$column`$compair $value;";
+        $this->sql  .=  "WHERE `$column` $compair $value;";
 
+        return $this;
+    }
+    public function having($column, $compair, $value)
+    {
+        $this->sql  .=  "Having `$column` $compair $value;";
+        // var_dump($this->sql);
         return $this;
     }
     public function andWhere($column, $compair, $value)
     {
-        $this->sql  .=  "AND `$column`$compair $value;";
+        $this->sql  .=  "AND `$column` $compair $value;";
 
         return $this;
     }
@@ -232,7 +238,7 @@ class MySQLHandler implements DBHandler
     }
     public function join($column, $col1, $condition, $col2)
     {
-        $this->sql  .=  "JOIN `$column` ON  $col1 $condition $col2;";
+        $this->sql  .=  "JOIN `$column` ON  $col1 $condition $col2 ";
         // var_dump($this->sql);
 
         return $this;
