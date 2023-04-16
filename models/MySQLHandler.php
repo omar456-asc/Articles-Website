@@ -212,9 +212,10 @@ class MySQLHandler implements DBHandler
 
         return $this;
     }
+
     public function where($column, $compair, $value)
     {
-        $this->sql  .=  "WHERE `$column` $compair $value;";
+        $this->sql  .=  "WHERE `$column` $compair $value";
 
         return $this;
     }
@@ -239,6 +240,13 @@ class MySQLHandler implements DBHandler
     public function join($column, $col1, $condition, $col2)
     {
         $this->sql  .=  "JOIN `$column` ON  $col1 $condition $col2 ";
+        // var_dump($this->sql);
+
+        return $this;
+    }
+    public function groupBy($column)
+    {
+        $this->sql  .=  " GROUP BY `$column`; ";
         // var_dump($this->sql);
 
         return $this;
