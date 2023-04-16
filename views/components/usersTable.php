@@ -2,43 +2,31 @@
 $users = $db->select('users', "*")->join('groups', 'users.GroupID', '=', "groups.id")->getALL();
 $groups = $db->select('groups', '*')->getALL();
 
-// check if group filter is selected
-if (isset($_POST['groupFilter'])) {
-    var_dump($_POST['groupFilter']);
-    $groupFilter = $_POST['groupFilter'];
-    if ($groupFilter != 'all') {
-        //$users = $db->select('users', "users.*, groups.name")->where('GroupID', '=', $groupFilter)->join('groups', 'users.GroupID', '=', "groups.id")->getAll();
-        $users = $db->prepare("(SELECT users.*, groups.name FROM `users` JOIN `groups` ON users.GroupID = groups.id WHERE users.GroupID = ?)")
-            ->bind_param(
-                'i',
-                $groupFilter
-            )
-            ->execute()
-            ->getAll();
-        var_dump($users);
-    }
+$groupFilter = $_POST['groupFilter'] ?? 'all';
+$searchFilter = $_POST['searchFilter'] ?? '';
+
+$sql = "SELECT users.*, groups.name AS `name` FROM users JOIN `groups` ON users.GroupID = groups.id";
+$params = [];
+
+// apply group filter if selected
+if ($groupFilter != 'all') {
+    $sql .= " WHERE GroupID = ?";
+    $params[] = $groupFilter;
 }
 
-// check if search filter is selected
-if (isset($_POST['searchFilter'])) {
-    if ($_POST['searchFilter'] == "") {
+// apply search filter if entered
+if ($searchFilter != '') {
+    if (!empty($params)) {
+        $sql .= " AND";
     } else {
-        $searchFilter = $_POST['searchFilter'];
-        $users = $db->whereLike('FirstName', "%$searchFilter%") // filter users by first name
-            ->orWhereLike('LastName', "%$searchFilter%") // filter users by last name
-            ->orWhereLike('Username', "%$searchFilter%")->getAll(); // filter users by username
+        $sql .= " WHERE";
     }
+    $sql .= " (FirstName LIKE ? OR LastName LIKE ? OR Username LIKE ?)";
+    $params = array_merge($params, ["%$searchFilter%", "%$searchFilter%", "%$searchFilter%"]);
 }
 
-//$users = $db->select('users', "*", "JOIN groups ON users.GroupID = groups.id WHERE $groupFilter AND $nameFilter")->getALL();
-//var_dump($users);
-//$users = $users->getAll(); // get all filtered users
-
-
-
-// $db->get_all_records_paginated(array(), 0);
-// var_dump($users);
-//var_dump($groups);
+// execute the query and fetch the results
+$users = $db->execute($sql, $params)->fetchAll();
 ?>
 <div class="p-3">
     <form method="POST">
@@ -69,38 +57,38 @@ if (isset($_POST['searchFilter'])) {
                 <th>Actions</th>
 
 
-                <!-- <?php
-                        foreach (array_keys($users[0]) as $user)
-                            echo "<th scope='col'>$user </th>";
-                        ?> -->
             </tr>
         </thead>
         <tbody class="table-group-divider">
             <?php
-            foreach ($users as $user) {
-                echo "  <tr>";
-                echo "<th scope='row'>" . $user['UserID'] . "</th>";
-                echo "<th >" . $user['Username'] . "</th>";
-                echo "<th >" . $user['Email'] . "</th>";
-                echo "<th >" . $user['FirstName'] . " " .  $user['LastName'] .  "</th>";
-                echo "<th >" . $user['Phone'] . "</th>";
-                echo "<th >" . $user['name'] . "</th>";
+            if (empty($users)) {
+                echo "<tr><td colspan='7'>No users found</td></tr>";
+            } else {
+                foreach ($users as $user) {
+                    echo "  <tr>";
+                    echo "<th scope='row'>" . $user['UserID'] . "</th>";
+                    echo "<th >" . $user['Username'] . "</th>";
+                    echo "<th >" . $user['Email'] . "</th>";
+                    echo "<th >" . $user['FirstName'] . " " .  $user['LastName'] .  "</th>";
+                    echo "<th >" . $user['Phone'] . "</th>";
+                    echo "<th >" . $user['name'] . "</th>";
 
-                echo "<th>";
-                echo '<a class="btn" href="">
+                    echo "<th>";
+                    echo '<a class="btn" href="">
                         <i class="fa fa-eye text-black"></i>
                     </a>';
-                echo '<a class="btn" href="">
+                    echo '<a class="btn" href="">
                         <i class="fa fa-edit text-primary"></i>
                     </a>';
-                echo '<a class="btn" href="">
+                    echo '<a class="btn" href="">
                         <i class="fa fa-close text-danger"></i>
                     </a>';
 
-                echo "</th>";
+                    echo "</th>";
 
 
-                echo "  </tr>";
+                    echo "  </tr>";
+                }
             }
             ?>
         </tbody>
