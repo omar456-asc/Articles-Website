@@ -8,5 +8,9 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'DBHandler' => $baseDir . '/models/DBHandler.php',
+    'GroupController' => $baseDir . '/controllers/GroupController.php',
+    'GroupFromValidation' => $baseDir . '/utils/GroupFormValidation.php',
+    'HelperMethods' => $baseDir . '/utils/HelperMethods.php',
     'MySQLHandler' => $baseDir . '/models/MySQLHandler.php',
+    'UserFromValidation' => $baseDir . '/utils/UserFormValidation.php',
 );
