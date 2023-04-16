@@ -1,8 +1,11 @@
 <?php
-$groups = $db->select('groups', '*')->getALL();
+//$groups = $db->select('groups', '*')->getALL();
 
+$controller = new GroupController();
+$groups = $controller->index();
 ?>
 <div class="p-3">
+      <button class="btn btn-primary"> <a style="text-decoration: none; color:white" href="../views/createGroup.php"> Create New Group</a></button>
     <table class=" table ">
         <thead>
             <tr>
@@ -27,10 +30,10 @@ $groups = $db->select('groups', '*')->getALL();
                 echo "<th >" . $group['description'] . "</th>";
 
                 echo "<th>";
-                echo '<a class="btn" href="">
+                echo '<a class="btn" href="./components/group-users.php">
                         <i class="fa fa-eye text-black"></i>
                     </a>';
-                echo '<a class="btn" href="">
+                echo '<a class="btn" href="../views/editGroup.php?groupId=' . $group['id'] . '">
                         <i class="fa fa-edit text-primary"></i>
                     </a>';
                 echo '<a class="btn" href="">
