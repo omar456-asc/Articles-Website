@@ -6,17 +6,17 @@ class GroupFromValidation
     private $errors = [];
     private $groupName;
     private $groupDescription;
-    private $groupImg;
+    private $groupIcon;
 
     private $generatedImgName;
    
 
-    public function __construct($groupName, $groupDescription, $groupImg)
+    public function __construct($groupName, $groupDescription, $groupIcon)
     {
 
         $this->groupName = $groupName ? $groupName : "";
         $this->groupDescription = $groupDescription ? $groupDescription : "";
-        // $this->groupImg = $groupImg ? $groupImg : "";
+        $this->groupIcon = $groupIcon ? $groupIcon : "";
        
     }
 
@@ -43,27 +43,14 @@ class GroupFromValidation
       
     }
  
-
-    // private function validate_groupImage($groupImg)
-    // {
-    //     var_dump($groupImg);
-    //     if($groupImg['size'] >10000000){
-    //         array_push($this->errors, 'Image is To big');
-    //     }elseif(!strstr($groupImg["type"], 'image')){
-    //         array_push($this->errors, "File Type Is Not Supported ");
-    //     }else {
-    //         //var_dump($groupImg['type']);
-    //          $dist = "../assets/img/groups/".$this->groupName.".jpg";
-    //          move_uploaded_file($groupImg['tmp_name'], $dist);
-            
-    //     }
-    // }
+    
  
     private function validate_creating_group()
     {
         $this->validate_groupName($this->groupName);
         $this->validate_groupDescription($this->groupDescription);
-        //$this->validate_groupImage($this->groupImg);
+    
+        //$this->validate_groupImage($this->groupIcon);
         // return $this->;
     }
     public function get_errors()
@@ -78,7 +65,7 @@ class GroupFromValidation
             return [
                 "name" => $this->groupName,
                 "description" => $this->groupDescription,
-                //"icon" => $this->groupName.'.jpg'
+                "icon" => $this->groupIcon
             ];
         }
     }

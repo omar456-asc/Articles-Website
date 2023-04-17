@@ -22,13 +22,12 @@ class GroupController
     {
         $groupName = $_POST['groupName'];
         $groupDesc = $_POST['groupDescription'];
-        $groupImg = $_FILES['groupImg'];
-        //var_dump($groupName, $groupDesc, $groupImg);
+        $groupIcon = $_POST['groupIcon'];
 
         $validateGroup = new GroupFromValidation(
             $groupName,
             $groupDesc,
-            $groupImg
+            $groupIcon
         );
         $errors =$validateGroup->get_errors();
         if(count($errors) > 0) {
@@ -46,13 +45,14 @@ public function update($groupID){
 
     $groupName = $_POST['groupName'];
     $groupDesc = $_POST['groupDescription'];
-    $groupImg = $_FILES['groupImg'];
-    //var_dump($groupName, $groupDesc, $groupImg);
+    $groupIcon = $_POST['groupIcon'];
+    //$groupImg = $_FILES['groupImg'];
+   // var_dump($groupName, $groupDesc, $groupIcon);
 
     $validateGroup = new GroupFromValidation(
         $groupName,
         $groupDesc,
-        $groupImg
+        $groupIcon
     );
     $errors =$validateGroup->get_errors();
     if(count($errors) > 0) {

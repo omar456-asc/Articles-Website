@@ -3,11 +3,9 @@
 $groupId= intval($_GET['groupId']);
 $controller =  new GroupController();
 $group = $controller->show($groupId);
-var_dump($group);
 $users = $controller->filterUsersByGroup($groupId);
-
-$imgDir = "../assets/img/groups/".$group['icon'];
-
+//$imgDir = "../assets/img/groups/".$group['icon'];
+$are_users = count($users);
 ?>
 
 <div class="p-3">
@@ -15,7 +13,8 @@ $imgDir = "../assets/img/groups/".$group['icon'];
         
         <?php
            if(strlen($group['icon'])){
-                echo"<img  class='card-img-top' src='".$imgDir."'/>";
+                echo"<i style='margin: 10px; font-size: 2rem' class='".$group['icon']."'></i>";
+               //echo "<i class='fa fa-pencil-square-o' aria-hidden='true'></i>";
             }
             echo "<h5 class='card-title m-3'> Group Name :".$group['name']. "</h5>";
             echo "<p class='card-text m-3'> Group Name :".$group['description']. "</p>";
@@ -39,8 +38,9 @@ $imgDir = "../assets/img/groups/".$group['icon'];
                         ?> -->
             </tr>
         </thead>
-        <tbody class="table-group-divider">
-            <?php
+       <?php  if($are_users) {
+       echo "<tbody class='table-group-divider'>";
+            
             foreach ($users as $user) {
                 echo "  <tr>";
                 echo "<th scope='row'>" . $user['UserID'] . "</th>";
@@ -51,6 +51,16 @@ $imgDir = "../assets/img/groups/".$group['icon'];
                 echo "<th>".$user['GroupID']."</th>";
          
             }
-            ?>
-        </tbody>
+            
+       echo" </tbody>";
+        }
+          else{
+            echo "<tbody class='table-group-divider'>";
+            echo "<h2>This Group Doesn't Have Users yet</h2>";
+            echo" </tbody>";
+        
+      
+          }
+        
+       ?>
     </table>
