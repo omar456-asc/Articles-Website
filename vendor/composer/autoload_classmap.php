@@ -7,10 +7,14 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'ContainFilter' => $baseDir . '/models/containFilter.php',
+    'Core\\Router' => $baseDir . '/config/Router.php',
     'DBHandler' => $baseDir . '/models/DBHandler.php',
     'GroupController' => $baseDir . '/controllers/GroupController.php',
     'GroupFromValidation' => $baseDir . '/utils/GroupFormValidation.php',
     'HelperMethods' => $baseDir . '/utils/HelperMethods.php',
+    'HomeController' => $baseDir . '/controllers/HomeController.php',
     'MySQLHandler' => $baseDir . '/models/MySQLHandler.php',
     'UserFromValidation' => $baseDir . '/utils/UserFormValidation.php',
+    'filter_interface' => $baseDir . '/models/filter_interface.php',
 );
