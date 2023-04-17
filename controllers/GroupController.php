@@ -84,6 +84,38 @@ public function delete($groupID){
     return $deleted;
 }
 
+public function filter($name , $desc){
+    if($name != '' && $desc == ''){
+       return  $this->filterByGroupName($name);
+    }
+    if($name == '' && $desc != ''){
+       return  $this->filterByGroupDesc($desc);
+    }
+    if($name != '' && $desc != ''){
+        return $this->filterByNameAndDesc($name, $desc);
+    }
+}
+
+public function filterByGroupName($name){
+    $qry= "SELECT * FROM `groups` WHERE LOWER(name) = LOWER('$name')";
+    $group = $this->db->filter_groups($qry);
+    return $group;
+
+
+}
+public function filterByGroupDesc($desc){
+    $qry = "SELECT * FROM `groups` WHERE LOWER(description) = LOWER('$desc')";
+    $group = $this->db->filter_groups($qry);
+    return $group;
+
+}
+public function filterByNameAndDesc($name, $desc){
+    $qry = "SELECT * FROM `groups` WHERE LOWER(name) = LOWER('$name') AND LOWER(description) = LOWER('$desc')";
+    $group = $this->db->filter_groups($qry);
+    return $group;
+
+}
+
 
 }
 ?>
