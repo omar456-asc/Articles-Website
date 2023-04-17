@@ -30,13 +30,13 @@ $groups = $controller->index();
                 echo "<th >" . $group['description'] . "</th>";
 
                 echo "<th>";
-                echo '<a class="btn" href="./components/group-users.php">
+                echo '<a class="btn" href="../views/usersOfAGroup.php?groupId='.$group['id'].'">
                         <i class="fa fa-eye text-black"></i>
                     </a>';
                 echo '<a class="btn" href="../views/editGroup.php?groupId=' . $group['id'] . '">
                         <i class="fa fa-edit text-primary"></i>
                     </a>';
-                echo '<a class="btn" href="">
+                echo '<a class="btn" href="../views/deleteGroup.php?groupId='.$group['id'] . '">
                         <i class="fa fa-close text-danger"></i>
                     </a>';
 
@@ -50,3 +50,4 @@ $groups = $controller->index();
     </table>
 
 </div>
+

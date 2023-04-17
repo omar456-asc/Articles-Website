@@ -1,11 +1,14 @@
 <?php
 require_once('../config/validationConfig.php');
+//$assets_dir = "../assets/img/groups"
 class GroupFromValidation
 {
     private $errors = [];
     private $groupName;
     private $groupDescription;
     private $groupImg;
+
+    private $generatedImgName;
    
 
     public function __construct($groupName, $groupDescription, $groupImg)
@@ -13,7 +16,7 @@ class GroupFromValidation
 
         $this->groupName = $groupName ? $groupName : "";
         $this->groupDescription = $groupDescription ? $groupDescription : "";
-        $this->groupImg = $groupImg ? $groupImg : "";
+        // $this->groupImg = $groupImg ? $groupImg : "";
        
     }
 
@@ -41,23 +44,26 @@ class GroupFromValidation
     }
  
 
-    private function validate_groupImage($groupImg)
-    {
-
-        if (is_uploaded_file(($groupImg['name']))) {
-            if ($groupImg["size"] > 3000000) {
-                array_push($this->errors, "File Is Too Big");
-            } elseif (!strstr($groupImg["type"], 'image')) {
-                array_push($this->errors, "File Type Is Not Supported ");
-            }
-        }
-    }
+    // private function validate_groupImage($groupImg)
+    // {
+    //     var_dump($groupImg);
+    //     if($groupImg['size'] >10000000){
+    //         array_push($this->errors, 'Image is To big');
+    //     }elseif(!strstr($groupImg["type"], 'image')){
+    //         array_push($this->errors, "File Type Is Not Supported ");
+    //     }else {
+    //         //var_dump($groupImg['type']);
+    //          $dist = "../assets/img/groups/".$this->groupName.".jpg";
+    //          move_uploaded_file($groupImg['tmp_name'], $dist);
+            
+    //     }
+    // }
  
     private function validate_creating_group()
     {
         $this->validate_groupName($this->groupName);
         $this->validate_groupDescription($this->groupDescription);
-        $this->validate_groupImage($this->groupImg);
+        //$this->validate_groupImage($this->groupImg);
         // return $this->;
     }
     public function get_errors()
@@ -72,7 +78,7 @@ class GroupFromValidation
             return [
                 "name" => $this->groupName,
                 "description" => $this->groupDescription,
-                "icon" => $this->groupImg['name'],
+                //"icon" => $this->groupName.'.jpg'
             ];
         }
     }

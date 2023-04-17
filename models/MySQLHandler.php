@@ -209,10 +209,17 @@ class MySQLHandler implements DBHandler
 
         return $this;
     }
+  
     public function where($column, $compair, $value)
     {
         $this->sql  .=  "WHERE `$column`$compair $value;";
 
+        return $this;
+    }
+    public function having($column, $compair, $value)
+    {
+        $this->sql  .=  "Having `$column` $compair $value;";
+        // var_dump($this->sql);
         return $this;
     }
     public function andWhere($column, $compair, $value)
@@ -281,6 +288,13 @@ class MySQLHandler implements DBHandler
     public function deleteDB($tabel)
     {
         $this->sql = "DELETE FROM `$tabel` ";
+        return $this;
+    }
+
+    public function soft_delete($table, $id)
+    {
+        $this->sql = "UPDATE `$table` SET `is_deleted` = 1 WHERE  `id` = $id";
+         $this->execute();
         return $this;
     }
 
