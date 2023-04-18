@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 require_once("../vendor/autoload.php");
 
 
@@ -37,7 +40,7 @@ $password = isset($_POST["password"]) ? $_POST["password"] : "";
     }
     else
     {
-        $user_id="";
+        
         $db = new MySQLHandler("users");
 
        
@@ -66,6 +69,17 @@ $password = isset($_POST["password"]) ? $_POST["password"] : "";
 
     }
 }
+
+//! logout logic
+// {
+//     session_start();
+//     session_unset();
+//     session_destroy();
+    
+//     header("Location: login.php");
+
+// }
+
 
 
 
