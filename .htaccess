@@ -1,9 +1,0 @@
-Options -Indexes
-Options -MultiViews
-
-RewriteEngine On
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
-RewriteRule ^([^/]+)(/([^/]+))?(/([^/]+))?(/([^/]+))? index.php?controller=$1&method=$3&id=$5 [QSA,L]

@@ -12,7 +12,9 @@
     ],
     "classmap": [
       "models",
-      "controllers"
+      "controllers",
+      "utils",
+      "config"
     ]
   },
   "require": {}
