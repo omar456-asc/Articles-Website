@@ -53,7 +53,7 @@ $password = isset($_POST["password"]) ? $_POST["password"] : "";
         $_SESSION["user_id"]=$user["UserID"];
         $_SESSION["group_name"]=$user["name"];
         header("Location: home.php");
-
+        exit();
         // echo "<pre>";
         // var_dump($user);
         // echo "</pre>";
@@ -77,6 +77,7 @@ $password = isset($_POST["password"]) ? $_POST["password"] : "";
 //     session_destroy();
     
 //     header("Location: login.php");
+ //      exit();    
 
 // }
 
