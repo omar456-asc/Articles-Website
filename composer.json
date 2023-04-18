@@ -8,6 +8,8 @@
     },
     "files": [
       "config/DBconfig.php",
+      "config/validationConfig.php",
+      
       "utils/HelperMethods.php"
     ],
     "classmap": [

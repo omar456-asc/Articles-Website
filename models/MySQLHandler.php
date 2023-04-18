@@ -88,14 +88,14 @@ class MySQLHandler implements DBHandler
 
     private function get_results($sql)
     {
-        $this->debug($sql);
+        // $this->debug($sql);
         $_handler_results = mysqli_query($this->_db_handler, $sql);
         $_arr_results = array();
 
         if ($_handler_results) {
-            // while ($row = mysqli_fetch_array($_handler_results, MYSQLI_ASSOC)) {
-            //     $_arr_results[] = array_change_key_case($row);
-            // }
+            while ($row = mysqli_fetch_array($_handler_results, MYSQLI_ASSOC)) {
+                $_arr_results[] = array_change_key_case($row);
+            }
             $this->disconnect();
             return $_arr_results;
         } else {
@@ -208,39 +208,42 @@ class MySQLHandler implements DBHandler
     }
     public function select($table, $column)
     {
-        $this->sql = "SELECT $column FROM `$table` ";
+        $this->sql = "SELECT $column FROM `$table`";
 
         return $this;
     }
 
+
     public function where($column, $compair, $value)
     {
-        $this->sql  .=  "WHERE `$column` $compair $value";
+        $this->sql  .=  "WHERE $column $compair '$value' ";
+
+
 
         return $this;
     }
     public function having($column, $compair, $value)
     {
-        $this->sql  .=  "Having `$column` $compair $value;";
-        // var_dump($this->sql);
+        $this->sql  .=  "Having `$column` $compair '$value';";
+
         return $this;
     }
     public function andWhere($column, $compair, $value)
     {
-        $this->sql  .=  "AND `$column` $compair $value;";
+        $this->sql  .=  "AND $column $compair '$value' ;";
 
         return $this;
     }
     public function orWhere($column, $compair, $value)
     {
-        $this->sql  .=  "OR `$column`$compair $value;";
+        $this->sql  .=  "OR `$column`$compair '$value';";
 
         return $this;
     }
     public function join($column, $col1, $condition, $col2)
     {
         $this->sql  .=  "JOIN `$column` ON  $col1 $condition $col2 ";
-        // var_dump($this->sql);
+
 
         return $this;
     }
@@ -262,8 +265,6 @@ class MySQLHandler implements DBHandler
     }
     public function getOne()
     {
-        $this->debug($this->sql);
-
         $this->query = mysqli_query($this->conn, $this->sql);
         $data = mysqli_fetch_assoc($this->query);
 
@@ -303,6 +304,17 @@ class MySQLHandler implements DBHandler
     {
         $this->sql = "DELETE FROM `$tabel` ";
         return $this;
+    }
+
+    public function soft_delete($table, $id)
+    {
+        $this->sql = "UPDATE `$table` SET `is_deleted` = 1 WHERE  `id` = $id";
+        $this->execute($this->sql);
+        return $this;
+    }
+    public function filter_groups($qry)
+    {
+        return $this->get_results($qry);
     }
 
     // public function execute()

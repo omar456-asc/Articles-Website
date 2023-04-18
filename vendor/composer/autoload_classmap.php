@@ -8,7 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'ContainFilter' => $baseDir . '/models/containFilter.php',
-    'Core\\Router' => $baseDir . '/config/Router.php',
+    'config\\Router' => $baseDir . '/config/Router.php',
     'DBHandler' => $baseDir . '/models/DBHandler.php',
     'GroupController' => $baseDir . '/controllers/GroupController.php',
     'GroupFromValidation' => $baseDir . '/utils/GroupFormValidation.php',
