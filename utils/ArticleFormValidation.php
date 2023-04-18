@@ -34,14 +34,31 @@ class ArticleFormValidation{
         }
     }
     public function validate_image($image){
-        if (is_uploaded_file(($image['name']))) {
-            if ($image["size"] > 3000000) {
-                array_push($this->errors, "File Is Too Big");
-            } elseif (!strstr($image["type"], 'image')) {
-                array_push($this->errors, "File Type Is Not Supported ");
-            }
+    //     if (is_uploaded_file(($image['name']))) {
+    //         if ($image["size"] > 3000000) {
+    //             array_push($this->errors, "File Is Too Big");
+    //         } elseif (!strstr($image["type"], 'image')) {
+    //             array_push($this->errors, "File Type Is Not Supported ");
+    //         }else {
+    //                      var_dump($image['name']);
+    //                      $dist = "../assets/img/articles/".$this->title.".jpg";
+    //                      move_uploaded_file($$image['tmp_name'], $dist);
+            
+    //                }
+    // }
+
+    //var_dump($image);
+        if($image['size'] >10000000){
+            array_push($this->errors, 'Image is To big');
+        }elseif(!strstr($image["type"], 'image')){
+            array_push($this->errors, "File Type Is Not Supported ");
+        }else {
+            var_dump($image);
+             $dist = "../assets/img/articles/".$this->title.".jpg";
+             move_uploaded_file($image['tmp_name'], $dist);
+
         }
-    }
+}
 
     public function validate_fullArticle($full_article){
         if(empty($full_article)){
@@ -79,7 +96,7 @@ class ArticleFormValidation{
             return [
                 "title" => $this->title,
                 "summary" => $this->summary,
-                "image" => $this->image,
+                "image" => $this->title.'.jpg',
                 "full_article" => $this->full_article,
                 "user_id" => $this->user_id
             ];

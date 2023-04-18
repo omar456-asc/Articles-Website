@@ -5,7 +5,7 @@ $Artcontroller = new ArticleController();
 $article = $Artcontroller->show($articleId);
 
 ?>
-
+<!-- src="../../assets/img/articles/'<?=$article['image']?>'" -->
 <!-- Main content -->
 <section class="content" style="font-family: 'DejaVu Math TeX Gyre'">
         <div class="container d-flex flex-column">
@@ -13,7 +13,11 @@ $article = $Artcontroller->show($articleId);
                 <h2 class="col-12 fw-bold text-center card-header"><strong><?= $article['title'] ?></strong></h2>
                 <div class="card-body">
                     <div class="text-center">
-                        <img  width="80%" height="80%" src="<?= $article['image'] ?>" class="img-fluid my-3">
+                        <?php
+                            echo"<img style='width:50%;height:50%;' src='../../assets/img/articles/".$article['image']."'/>";  
+                    
+                        ?>
+                       
                     </div>
                 </div>
             </div>

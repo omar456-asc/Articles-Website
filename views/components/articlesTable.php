@@ -1,8 +1,7 @@
 <?php
-require_once('../controllers/ArticleController.php');
-$articlecontroller = new ArticleController();
 
-$articles =$articlecontroller->index();
+$db = new MySQLHandler("articles");
+$articles = $db->select('articles', "*")->getALL();
 ?>
 <div class="p-3">
     <table class=" table ">
@@ -29,7 +28,7 @@ $articles =$articlecontroller->index();
                 <th ><?= $article['publishing_date']?></th>
 
                 <th>
-                <a class="btn" <?="href='../Showarticle.php?ArticleId={$article['id']}' ";?>>
+                <a class="btn" <?="href='../views/Showarticle.php?ArticleId={$article['id']}' ";?>>
                         <i class="fa fa-eye text-black"></i>
                     </a>
                 <a class="btn" href="">
