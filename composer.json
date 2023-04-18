@@ -15,7 +15,8 @@
     "classmap": [
       "models",
       "controllers",
-      "utils"
+      "utils",
+      "config"
     ]
   },
   "require": {}
