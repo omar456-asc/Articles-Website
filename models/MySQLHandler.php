@@ -208,38 +208,39 @@ class MySQLHandler implements DBHandler
     }
     public function select($table, $column)
     {
-        $this->sql = "SELECT $column FROM `$table`";
+        $this->sql = "SELECT $column FROM $table ";
 
         return $this;
     }
     public function where($column, $compair, $value)
     {
-        $this->sql  .=  "WHERE `$column` $compair $value;";
-
+        $this->sql  .=  "WHERE $column $compair '$value' ";
+        
+       
         return $this;
     }
     public function having($column, $compair, $value)
     {
-        $this->sql  .=  "Having `$column` $compair $value;";
-        // var_dump($this->sql);
+        $this->sql  .=  "Having `$column` $compair '$value';";
+      
         return $this;
     }
     public function andWhere($column, $compair, $value)
     {
-        $this->sql  .=  "AND `$column` $compair $value;";
+        $this->sql  .=  "AND $column $compair '$value' ;";
 
         return $this;
     }
     public function orWhere($column, $compair, $value)
     {
-        $this->sql  .=  "OR `$column`$compair $value;";
+        $this->sql  .=  "OR `$column`$compair '$value';";
 
         return $this;
     }
     public function join($column, $col1, $condition, $col2)
     {
         $this->sql  .=  "JOIN `$column` ON  $col1 $condition $col2 ";
-        // var_dump($this->sql);
+      
 
         return $this;
     }
@@ -252,9 +253,10 @@ class MySQLHandler implements DBHandler
     }
     public function getOne()
     {
+        $this->debug($this->sql);
         $this->query = mysqli_query($this->conn, $this->sql);
         $data = mysqli_fetch_assoc($this->query);
-
+        
         return $data;
     }
 

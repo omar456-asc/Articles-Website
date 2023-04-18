@@ -6,4 +6,4 @@ define("__USER__", "Mahmoud_admin");
 define("__PASS__", "Admin_123");
 define("__DB__", "articlesWebsiteDb");
 define("__RECORDS_PER_PAGE__", 10);
-define("__Debug__Mode__", 1);
+define("__Debug__Mode__", 0);
