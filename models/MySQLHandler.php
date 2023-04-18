@@ -208,7 +208,7 @@ class MySQLHandler implements DBHandler
     }
     public function select($table, $column)
     {
-        $this->sql = "SELECT $column FROM $table ";
+        $this->sql = "SELECT $column FROM `$table`";
 
         return $this;
     }
@@ -256,6 +256,8 @@ class MySQLHandler implements DBHandler
     }
     public function getALL()
     {
+        $this->debug($this->sql);
+
         $this->query = mysqli_query($this->conn, $this->sql);
         $data = mysqli_fetch_all($this->query, MYSQLI_ASSOC);
 
@@ -264,6 +266,7 @@ class MySQLHandler implements DBHandler
     public function getOne()
     {
         $this->debug($this->sql);
+
         $this->query = mysqli_query($this->conn, $this->sql);
         $data = mysqli_fetch_assoc($this->query);
 

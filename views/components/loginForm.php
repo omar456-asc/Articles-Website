@@ -1,5 +1,6 @@
 <main class="main-content  mt-0">
-    <div class="page-header align-items-start min-vh-100" style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');">
+    <div class="page-header align-items-start min-vh-100"
+        style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');">
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container my-auto">
             <div class="row">
@@ -28,31 +29,31 @@
                             </div>
                         </div>
                         <div class="card-body">
-                         
-                            <form role="form"  action="/Articles-Website/views/login.php" method="post" class="text-start">
-                            <?php
-                            if (isset($error)) {
-                               
-                                    echo '<span class="error-msg">' . $error . '</span>';
-                               
-                            };
-                            ?>
+
+                            <form role="form" action="../views/login.php" method="post" class="text-start">
+                                <?php
+                                if (!empty($error)) {
+
+                                    echo '<span class=" alert alert-danger">' . $error . '</span>';
+                                };
+                                ?>
                                 <div class="input-group input-group-outline my-3">
-                                   
+
                                     <input type="email" name="email" class="form-control" id="mail" placeholder="Email">
                                 </div>
                                 <div class="input-group input-group-outline mb-3">
-                                  
+
                                     <input type="password" name="password" class="form-control" placeholder="Password">
                                 </div>
                                 <div class="form-check form-switch d-flex align-items-center mb-3">
-                                    <input class="form-check-input" name="rememberMe" type="checkbox" id="rememberMe" >
+                                    <input class="form-check-input" name="rememberMe" type="checkbox" id="rememberMe">
                                     <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit"  class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign
+                                        in</button>
                                 </div>
-                              
+
                             </form>
                         </div>
                     </div>
