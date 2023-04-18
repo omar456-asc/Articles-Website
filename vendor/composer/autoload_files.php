@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'cc88c44bb43cee8e04d52bf70e6fa770' => $baseDir . '/config/DBconfig.php',
+    'b515b0219338af3e075d50cfef4ed646' => $baseDir . '/config/validationConfig.php',
     '488a2829fc4417163e1a5ff71d6f2674' => $baseDir . '/utils/HelperMethods.php',
 );
