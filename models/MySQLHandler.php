@@ -265,6 +265,8 @@ class MySQLHandler implements DBHandler
     }
     public function getOne()
     {
+        $this->debug($this->sql);
+
         $this->query = mysqli_query($this->conn, $this->sql);
         $data = mysqli_fetch_assoc($this->query);
 
