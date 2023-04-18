@@ -75,7 +75,7 @@ class UserFromValidation
     private function validate_userimage($userImg)
     {
 
-        if (is_uploaded_file(($userImg['name']))) {
+        if (is_array($userImg) && is_uploaded_file(($userImg['name']))) {
             if ($userImg["size"] > 3000000) {
                 array_push($this->errors, "File Is Too Big");
             } elseif (!strstr($userImg["type"], 'image')) {
@@ -120,6 +120,7 @@ class UserFromValidation
                 "LastName" => $this->lastName,
                 "groupID" => $this->groupID,
                 "avatar" => $this->userImg['name'],
+                "CreationTime" => date('Y-m-d H:i:s')
             ];
         }
     }
