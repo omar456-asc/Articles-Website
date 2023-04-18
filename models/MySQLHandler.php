@@ -88,14 +88,14 @@ class MySQLHandler implements DBHandler
 
     private function get_results($sql)
     {
-        $this->debug($sql);
+        // $this->debug($sql);
         $_handler_results = mysqli_query($this->_db_handler, $sql);
         $_arr_results = array();
 
         if ($_handler_results) {
-            // while ($row = mysqli_fetch_array($_handler_results, MYSQLI_ASSOC)) {
-            //     $_arr_results[] = array_change_key_case($row);
-            // }
+            while ($row = mysqli_fetch_array($_handler_results, MYSQLI_ASSOC)) {
+                $_arr_results[] = array_change_key_case($row);
+            }
             $this->disconnect();
             return $_arr_results;
         } else {
@@ -213,6 +213,7 @@ class MySQLHandler implements DBHandler
         return $this;
     }
 
+
     public function where($column, $compair, $value)
     {
         $this->sql  .=  "WHERE `$column` $compair $value";
@@ -299,6 +300,17 @@ class MySQLHandler implements DBHandler
     {
         $this->sql = "DELETE FROM `$tabel` ";
         return $this;
+    }
+
+    public function soft_delete($table, $id)
+    {
+        $this->sql = "UPDATE `$table` SET `is_deleted` = 1 WHERE  `id` = $id";
+        $this->execute($this->sql);
+        return $this;
+    }
+    public function filter_groups($qry)
+    {
+        return $this->get_results($qry);
     }
 
     // public function execute()
