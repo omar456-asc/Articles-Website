@@ -1,6 +1,8 @@
 <?php
-$db = new MySQLHandler("articles");
-$articles = $db->select('articles', "*")->getALL();
+require_once('../controllers/ArticleController.php');
+$articlecontroller = new ArticleController();
+
+$articles =$articlecontroller->index();
 ?>
 <div class="p-3">
     <table class=" table ">
