@@ -37,7 +37,7 @@
             <button class="btn btn-success"> <a style="text-decoration: none; color:white" href="../views/createUser.php">
                     Create New User</a></button>
 
-            <form method="POST ">
+            <form method="POST">
                 <div class="row">
                     <div class="mb-3 col-4">
                         <label for="groupFilter" class="form-label">Filter by Group:</label>
