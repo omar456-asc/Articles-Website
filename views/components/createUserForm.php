@@ -1,8 +1,11 @@
 <?php
+require_once('../controllers/UserController.php');
 // Get List Of Groups
-$db = new MySQLHandler("users");
-$groups = $db->select("groups", "id,name")->where("is_deleted", "=", "0")->getAll();
-require_once('../controllers/UserController.php')
+$groups = $db->select("groups", "id,name")->getAll();
+$controller = new UserController();
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+    $controller->store();
+}
 
 ?>
 

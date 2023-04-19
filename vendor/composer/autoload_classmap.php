@@ -6,9 +6,10 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'ArticleController' => $baseDir . '/controllers/ArticleController.php',
+    'ArticleFormValidation' => $baseDir . '/utils/ArticleFormValidation.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'ContainFilter' => $baseDir . '/models/containFilter.php',
-    'config\\Router' => $baseDir . '/config/Router.php',
     'DBHandler' => $baseDir . '/models/DBHandler.php',
     'GroupController' => $baseDir . '/controllers/GroupController.php',
     'GroupFromValidation' => $baseDir . '/utils/GroupFormValidation.php',
@@ -16,6 +17,8 @@ return array(
     'HomeController' => $baseDir . '/controllers/HomeController.php',
     'Logger' => $baseDir . '/config/Logger.php',
     'MySQLHandler' => $baseDir . '/models/MySQLHandler.php',
+    'UserController' => $baseDir . '/controllers/UserController.php',
     'UserFromValidation' => $baseDir . '/utils/UserFormValidation.php',
+    'config\\Router' => $baseDir . '/config/Router.php',
     'filter_interface' => $baseDir . '/models/filter_interface.php',
 );
