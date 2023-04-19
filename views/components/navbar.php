@@ -20,10 +20,12 @@
             <ul class="navbar-nav justify-content-end">
 
                 <li class="nav-item d-flex align-items-center">
+
                     <?php
-                    var_dump($_SESSION);
-                    if (isset($_SESSION["user_id"])) {
-                        echo   " <span class='d-sm-inline d-none'>Welcome</span>";
+                    // var_dump(getdate(strtotime($_SESSION['last_visit'])));
+                    if (!empty($_SESSION)) {
+                        echo   " <span class='d-sm-inline d-none mx-2'>Welcome , <strong>" . ucfirst($_SESSION["user_name"]) . " </strong></span>";
+                        echo '<span class="d-sm-inline d-none"> Your Last visit :<strong> ' . $_SESSION["last_visit"] . '</strong> </span>';
                     } else {
                         echo '<a href="../views/login.php" class="nav-link text-body font-weight-bold px-0">';
                         echo '<i class="fa fa-user me-sm-1"></i>';
