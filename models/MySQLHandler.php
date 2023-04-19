@@ -48,6 +48,8 @@ class MySQLHandler implements DBHandler
             }
         } catch (Exception $ex) {
             // log();
+            $logger = new Logger();
+            $logger->logException($ex);
             die("Somthing went wrong try again later");
         }
     }
@@ -301,17 +303,6 @@ class MySQLHandler implements DBHandler
         return $this;
     }
 
-    // public function execute()
-    // {
-    //     // print_r($this->sql);
-    //     // die;
-    //     $this->query = mysqli_query($this->conn, $this->sql);
-    //     if (mysqli_affected_rows($this->conn) > 0) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
     public function execute($sql, $params = [])
     {
         $stmt = $this->pdo->prepare($sql);
