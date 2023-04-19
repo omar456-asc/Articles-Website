@@ -10,7 +10,8 @@ class ArticleController{
         $this->db =  new MySQLHandler("articles");
     }
     public function index(){
-        $articles = $this->db->select('articles', "*")->getALL();
+        $articles = $this->db->select('articles', "*")->where('is_deleted','=',0)->getALL();
+        //var_dump($articles);
         return $articles;
 
     }
@@ -47,6 +48,13 @@ class ArticleController{
     $articles = $this->db->select("articles", "*") ->where('id', '=', $ArticleId)->getOne();
     return $articles;
 }
+
+public function delete($ArticleId){
+    
+    $deleted = $this->db->soft_delete('articles', $ArticleId);
+    return $deleted;
+}
+
 }
 
 
