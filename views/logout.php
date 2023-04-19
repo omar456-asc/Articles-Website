@@ -11,10 +11,18 @@ $db->update([
     date('Y-m-d H:i:s')
 ], $id);
 
+$data = $_COOKIE;
+
+foreach ($data as $k => $v) {
+    if (isset($_COOKIE[$k])) :
+        setcookie($k, '', time() - 7000000, '/');
+    endif;
+}
 
 
 session_unset();
 session_destroy();
+
 
 header("Location: login.php");
 exit();

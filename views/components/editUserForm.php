@@ -1,44 +1,19 @@
 <?php
-// if (isset($_GET['userid'])) {
+require_once('../controllers/UserController.php');
 
+// if (isset($_GET['userid'])) {
+$db = new MySQLHandler("groups");
 $userid = intval($_GET['userid']);
-$db = new MySQLHandler("users", 'UserID');
-$user_data = $db->select('users', "*")
-    ->join('groups', 'users.GroupID', '=', "groups.id")
-    ->where('UserId', '=', $userid)
-    ->getOne();
+
+$controller = new UserController();
+$user_data = $controller->show($userid);
+$id = $user_data['UserID'];
 $groups = $db->select("groups", "id,name")->getAll();
 // }
 // var_dump($user_data);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateUser'])) {
-    // var_dump($_POST);
-
-    require_once('../utils/UserFormValidation.php');
-
-    $userName = $_POST['username'];
-    $email = $_POST['useremail'];
-    $password = $_POST['password'];
-    $firstName = $_POST['firstname'];
-    $lastName = $_POST['lastname'];
-    $phoneNumber = $_POST['phone'];
-    $group = $_POST['group'];
-    $userImg['name'] = $user_data['avatar'];
-
-    $validateUser = new UserFromValidation(
-        $userName,
-        $email,
-        $password,
-        $firstName,
-        $lastName,
-        $phoneNumber,
-        $group,
-        $userImg
-    );
-    $errors = $validateUser->get_errors();
-    $userData = $validateUser->get_create_user_data();
-
-    $db->update($userData, $userid);
+    $controller->update($userid);
     HelperMethods::alert_massege('success', "User Updated successfully");
 }
 
@@ -47,32 +22,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateUser'])) {
 <form method="POST" action="<?= $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING']; ?>">
     <div class="form-group">
         <label for="userid-input">User ID</label>
-        <input type="text" class="form-control" id="userid-input" name="UserID" value="<?= $user_data['UserID'] ?>"
-            disabled>
+        <input type="text" class="form-control" id="userid-input" name="UserID" value="<?= $user_data['UserID'] ?>" disabled>
     </div>
     <div class="form-group">
         <label for="username-input">User Name</label>
-        <input type="text" class="form-control" id="username-input" name="username"
-            value="<?= $user_data['Username'] ?>">
+        <input type="text" class="form-control" id="username-input" name="username" value="<?= $user_data['Username'] ?>">
     </div>
     <div class="row">
 
         <div class="form-group col-6">
             <label for="username-input">First Name</label>
-            <input type="text" class="form-control" id="username-input" name="firstname"
-                value="<?= $user_data['FirstName'] ?>">
+            <input type="text" class="form-control" id="username-input" name="firstname" value="<?= $user_data['FirstName'] ?>">
         </div>
         <div class="form-group col-6">
             <label for="username-input">Last Name</label>
-            <input type="text" class="form-control" id="username-input" name="lastname"
-                value="<?= $user_data['LastName'] ?>">
+            <input type="text" class="form-control" id="username-input" name="lastname" value="<?= $user_data['LastName'] ?>">
         </div>
     </div>
 
     <div class="form-group">
         <label for="password-input">Password</label>
-        <input type="password" class="form-control" id="password-input" name="password"
-            value="<?= $user_data['Password'] ?>">
+        <input type="password" class="form-control" id="password-input" name="password" value="<?= $user_data['Password'] ?>">
     </div>
     <div class="form-group">
         <label for="email-input">Email</label>

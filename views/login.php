@@ -6,6 +6,7 @@ require_once('components/header.php');
 
 
 
+
 $error = "";
 if (!empty($_POST)) {
     $error = validate_form();
@@ -58,21 +59,27 @@ function validate_form()
 
 
 
+        $user = $db->select("users", " * ")
+            ->join('groups', 'users.GroupID', '=', "groups.id")
+            ->where(" Email ", " = ", $email)
+            ->andWhere(" Password ", " = ", $password)
+            ->getOne();
         if ($user) {
-            $_SESSION["user_id"] = $user["UserID"];
-            $_SESSION["group_name"] = $user["name"];
-            $_SESSION["user_name"] = $user["Username"];
 
-            // var_dump($date);
-            $_SESSION["last_visit"] = HelperMethods::formatDate($user['LastVisit']);
-
-
+            $data_arr = [
+                'loggedin' => true,
+                'user_id' => $user["UserID"],
+                'group_id' => $user["name"],
+                "user_name" => $user["Username"],
+                "last_visit" => HelperMethods::formatDate($user['LastVisit'])
+            ];
+            foreach ($data_arr as $k => $v) {
+                $_SESSION[$k] = $v;
+                if (isset($_POST['rememberMe'])) {
+                    setcookie($k, $v, time() + 30 * 24 * 60 * 60, '/');
+                }
+            }
             header("Location: home.php");
-
-            // echo "<pre>";
-            // var_dump($user);
-            // echo "</pre>";
-
         } else {
             return "incorrect email or password!";
         }
