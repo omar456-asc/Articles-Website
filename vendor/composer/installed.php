@@ -3,7 +3,7 @@
         'name' => 'pc/articles-website',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '16235c97122e4c55a7faa17add320b6ed4d21237',
+        'reference' => '13f6465e112707d95cc0af38e9ee85fb8e554966',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'pc/articles-website' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '16235c97122e4c55a7faa17add320b6ed4d21237',
+            'reference' => '13f6465e112707d95cc0af38e9ee85fb8e554966',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
