@@ -31,13 +31,33 @@ function validate_form()
         return "the email is not valid";
     } else {
         $user_id = "";
-        $db = new MySQLHandler("users");
+        try {
 
+
+         $db = new MySQLHandler("users");
+        } catch (Exception $ex) {
+            // log();
+            $logger = new Logger();
+            $logger->logException($ex);
+           
+        }
 
         //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
+        try {
 
-        $user = $db->select("users", " * ")->join('groups', 'users.GroupID', '=', "groups.id")->where(" Email ", " = ", $email)->andWhere(" Password ", " = ", $password)->getOne();
+
+            $user = $db->select("users", " * ")->join('groups', 'users.GroupID', '=', "groups.id")->where(" Email ", " = ", $email)->andWhere(" Password ", " = ", $password)->getOne();
+           } catch (Exception $ex) {
+               // log();
+               $logger = new Logger();
+               $logger->logException($ex);
+              
+           }
+       
+
+
+
         if ($user) {
             $_SESSION["user_id"] = $user["UserID"];
             $_SESSION["group_name"] = $user["name"];
