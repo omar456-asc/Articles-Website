@@ -14,6 +14,7 @@ return array(
     'GroupFromValidation' => $baseDir . '/utils/GroupFormValidation.php',
     'HelperMethods' => $baseDir . '/utils/HelperMethods.php',
     'HomeController' => $baseDir . '/controllers/HomeController.php',
+    'Logger' => $baseDir . '/config/Logger.php',
     'MySQLHandler' => $baseDir . '/models/MySQLHandler.php',
     'UserFromValidation' => $baseDir . '/utils/UserFormValidation.php',
     'filter_interface' => $baseDir . '/models/filter_interface.php',
