@@ -1,6 +1,8 @@
 <?php
+
 require_once("../vendor/autoload.php");
 
+require_once('components/header.php');
 
 
 
@@ -39,6 +41,12 @@ function validate_form()
         if ($user) {
             $_SESSION["user_id"] = $user["UserID"];
             $_SESSION["group_name"] = $user["name"];
+            $_SESSION["user_name"] = $user["Username"];
+
+            // var_dump($date);
+            $_SESSION["last_visit"] = HelperMethods::formatDate($user['LastVisit']);
+
+
             header("Location: home.php");
 
             // echo "<pre>";
@@ -54,7 +62,6 @@ function validate_form()
 
 
 
-require_once('components/header.php');
 
 
 require_once("components/navbar.php");

@@ -1,6 +1,5 @@
 <?php
 require_once("vendor/autoload.php");
-session_start();
 $db = new MySQLHandler("users");
 
 $host  = $_SERVER['HTTP_HOST'];
