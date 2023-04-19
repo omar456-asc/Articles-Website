@@ -1,5 +1,6 @@
 <?php
 require_once("vendor/autoload.php");
+<<<<<<< Updated upstream
 $db = new MySQLHandler("users");
 
 $host  = $_SERVER['HTTP_HOST'];
@@ -19,3 +20,28 @@ header("Location: http://$host$uri/$extra");
 // $router->route($uri, $method);
 
 // If the team understand uncomment and start working on the router class !!!
+=======
+session_start();
+
+
+
+if (!isset($_SESSION['loggedin'])) {
+    if (isset($_COOKIE['loggedin'])) {
+
+        $data = $_COOKIE;
+        // $data_arr = json_decode($data, true);
+
+        $_SESSION['loggedin'] = 'true';
+
+        foreach ($data as $k => $v) {
+            $_SESSION[$k] = $v;
+        }
+        var_dump($data);
+        // header("Location: views/home.php");
+    } else {
+        header("Location: views/login.php");
+    }
+} else {
+    header("Location: views/home.php");
+}
+>>>>>>> Stashed changes
