@@ -44,6 +44,7 @@ function validate_form()
         $user = $db->select("users", " * ")
             ->join('groups', 'users.GroupID', '=', "groups.id")
             ->where(" Email ", " = ", $email)
+            ->andWhere(" isDeleted ", " = ", 0)
             ->getOne();
         if ($user && password_verify($password, $user['Password'])) {
 
@@ -52,7 +53,8 @@ function validate_form()
                 'user_id' => $user["UserID"],
                 'group_id' => $user["name"],
                 "user_name" => $user["Username"],
-                "last_visit" => HelperMethods::formatDate($user['LastVisit'])
+                "last_visit" => HelperMethods::formatDate($user['LastVisit']),
+                "avatar" => $user["avatar"],
             ];
             foreach ($data_arr as $k => $v) {
                 $_SESSION[$k] = $v;

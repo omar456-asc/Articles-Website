@@ -14,7 +14,8 @@
             <ul class="navbar-nav">
                 <div class="user-panel mt-1  mb-1   text-center">
                     <div style="width: 120px;" class=" image  d-flex m-auto ">
-                        <img w src=" ../assets/img/bruce-mars.jpg" class="rounded-circle img-fluid   shadow-4" alt="User Image">
+                        <img w src="<?php echo '/Articles-Website/storage/Images/' . $_SESSION['avatar'] . $_SESSION['avatar']; ?>" class="rounded-circle img-fluid   shadow-4" alt="User Image">
+
                     </div>
                     <div class="info">
                         <h5 href="#" class="d-block text-white">Hello , <?= ucwords($_SESSION['user_name']) ?></h5>
