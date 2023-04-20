@@ -232,7 +232,7 @@ class MySQLHandler implements DBHandler
     }
     public function andWhere($column, $compair, $value)
     {
-        $this->sql  .=  "AND $column $compair '$value' ;";
+        $this->sql  .=  "AND $column $compair '$value' ";
 
         return $this;
     }

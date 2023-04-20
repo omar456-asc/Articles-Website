@@ -4,6 +4,7 @@ $groups = $groupsController->index();
 
 $userscontroller = new UserController();
 $userid = intval($_GET['userid']);
+$user_data = $userscontroller->show($userid);
 $id = $user_data['UserID'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateUser'])) {
@@ -17,9 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateUser'])) {
         HelperMethods::alert_massege('success ', $msg);
     }
 }
-
-
 $user_data = $userscontroller->show($userid);
+
+
 
 
 
@@ -27,35 +28,40 @@ $user_data = $userscontroller->show($userid);
 <form method="POST" action="<?= $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING']; ?>">
     <div class="form-group">
         <label for="userid-input">User ID</label>
-        <input type="text" class="form-control" id="userid-input" name="UserID" value="<?= $user_data['UserID'] ?>" disabled>
+        <input type="text" class="form-control" id="userid-input" name="UserID" value="<?= $user_data['UserID'] ?>"
+            disabled>
     </div>
     <div class="form-group">
         <label for="username-input">User Name</label>
-        <input type="text" class="form-control" id="username-input" name="username" value="<?= $user_data['Username'] ?>">
+        <input type="text" class="form-control" id="username-input" name="username"
+            value="<?= $user_data['Username'] ?>">
     </div>
     <div class="row">
 
         <div class="form-group col-6">
             <label for="username-input">First Name</label>
-            <input type="text" class="form-control" id="username-input" name="firstname" value="<?= $user_data['FirstName'] ?>">
+            <input type="text" class="form-control" id="username-input" name="firstname"
+                value="<?= $user_data['FirstName'] ?>">
         </div>
         <div class="form-group col-6">
             <label for="username-input">Last Name</label>
-            <input type="text" class="form-control" id="username-input" name="lastname" value="<?= $user_data['LastName'] ?>">
+            <input type="text" class="form-control" id="username-input" name="lastname"
+                value="<?= $user_data['LastName'] ?>">
         </div>
     </div>
 
     <div class="form-group">
         <label for="password-input">Password</label>
-        <input type="password" class="form-control" id="password-input" name="password" value="<?= $user_data['Password'] ?>">
+        <input type="password" class="form-control" id="password-input" name="password"
+            value="<?= $user_data['Password'] ?>">
     </div>
     <div class="form-group">
         <label for="email-input">Email</label>
         <input type="email" class="form-control" id="email-input" name="useremail" value="<?= $user_data['Email'] ?>">
     </div>
     <div class="form-group">
-        <label for="email-input">Phone</label>
-        <input type="text" class="form-control" id="email-input" name="phone" value="<?= $user_data['Phone'] ?>">
+        <label for="phone-input">Phone</label>
+        <input type="text" class="form-control" id="phone-input" name="phone" value="<?= $user_data['Phone'] ?>">
     </div>
     <div class="form-group">
         <label for="group" class="m-auto col-md-3 ">Group : </label>
