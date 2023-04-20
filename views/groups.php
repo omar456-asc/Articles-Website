@@ -1,6 +1,6 @@
 <?php
 require_once("../vendor/autoload.php");
-$db = new MySQLHandler("groups");
+$title = "Groups";
 
 require_once('components/header.php');
 
