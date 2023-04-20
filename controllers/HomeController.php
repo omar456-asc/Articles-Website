@@ -37,6 +37,8 @@ class HomeController
         return  $this->db->select('users', "name , count(*) as count")
             ->join('groups', 'users.GroupID', '=', "groups.id")
             ->where('IsDeleted', '=', 0)
+            ->andWhere('is_deleted', "=", "0")
+
             ->groupBy('GroupID')->getALL();
     }
 

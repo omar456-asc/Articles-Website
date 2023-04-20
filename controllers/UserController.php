@@ -40,6 +40,7 @@ class UserController
             // var_dump(count($errors));
             if (count($errors) <= 0) {
                 $UserData = $validateUser->get_create_user_data();
+                // var_dump($UserData);
                 $this->db->save($UserData);
                 return "User Created Successfully";
             } else {
