@@ -1,14 +1,13 @@
 <?php
 $user_id = isset($_GET['userid']) ? intval($_GET['userid']) : $_SESSION['user_id'];
 
-var_dump($user_id);
+$profileController = new ProfileController($user_id);
 
-$user_info =
-    $users = $this->db->select('users', '*')
-    ->join('groups', 'users.GroupID', '=', "groups.id")
-    ->where('IsDeleted', '=', 0)
-    ->getALL();
+$user = $profileController->getUserInfo();
+$articles = $profileController->getUserArticles();
+
 ?>
+
 <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
     <span class="mask  bg-gradient-primary  opacity-6"></span>
 </div>
@@ -22,34 +21,125 @@ $user_info =
         <div class="col-auto my-auto">
             <div class="h-100">
                 <h5 class="mb-1">
-                    Richard Davis
-                </h5>
+                    <?= $user['FirstName'] . " " . $user['LastName'] ?> </h5>
                 <p class="mb-0 font-weight-normal text-sm">
-                    CEO / Co-Founder
-                </p>
+                    Group : <strong> <?= $user['name'] ?></strong> </p>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-            <div class="nav-wrapper position-relative end-0">
-                <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
-                            <i class="material-icons text-lg position-relative">home</i>
-                            <span class="ms-1">App</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
-                            <i class="material-icons text-lg position-relative">email</i>
-                            <span class="ms-1">Messages</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
-                            <i class="material-icons text-lg position-relative">settings</i>
-                            <span class="ms-1">Settings</span>
-                        </a>
-                    </li>
-                </ul>
+
+    </div>
+
+    <div class="row my-4">
+        <div class="row ">
+            <div class="col-12 col-xl-6">
+                <div class="card card-plain h-100">
+                    <div class="card-header pb-0 p-3">
+                        <div class="row">
+                            <div class="col-md-8 d-flex align-items-center">
+                                <h6 class="">User Information</h6>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body p-3">
+
+                        <ul class="list-group">
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full
+                                    Name:</strong> &nbsp; <?= $user['FirstName'] . " " . $user['LastName'] ?></li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">User
+                                    Name:</strong>
+                                &nbsp; <?= $user['Username'] ?></li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong>
+                                &nbsp; <?= $user['Phone'] ?></li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong>
+                                &nbsp; <?= $user['Email'] ?></li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Creation
+                                    Date:</strong>
+                                &nbsp; <?= $user['CreationTime'] ?></li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Last
+                                    Vist:</strong>
+                                &nbsp; <?= $user['LastVisit'] ?></li>
+                            <li class="list-group-item border-0 ps-0 pb-0">
+                                <strong class="text-dark text-sm">Social:</strong> &nbsp;
+                                <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
+                                    <i class="fab fa-facebook fa-lg"></i>
+                                </a>
+                                <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
+                                    <i class="fab fa-twitter fa-lg"></i>
+                                </a>
+                                <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
+                                    <i class="fab fa-instagram fa-lg"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-xl-6">
+                <div class="card card-plain h-100">
+                    <div class="card-header pb-0 p-3">
+                        <div class="row">
+                            <div class="col-md-8 d-flex align-items-center">
+                                <h6 class="">Group Information</h6>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body p-3">
+                        <p class="text-sm">
+                            <?= $user['description']; ?>
+                        </p>
+                        <hr class="horizontal gray-light my-4">
+                        <ul class="list-group">
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Group
+                                    Name:</strong> &nbsp;
+                                <?= $user['name'] ?>
+                            </li>
+
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Group
+                                    Icon:</strong> &nbsp;
+                            </li>
+                            <i style="font-size:50px" class="text-center <?= $user['icon'] ?>"></i>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+
+    <div class="row">
+        <div class="col mt-4">
+            <div class="card">
+                <div class="card-header pb-0 px-3">
+                    <h6 class="">Articles </h6>
+                </div>
+                <div class="card-body pt-4 p-3">
+                    <ul class="list-group">
+                        <?php
+                        if (empty($articles))
+                            echo "<h4 class='text-center'> No Articles yet</h4>";
+                        foreach ($articles as $article) { ?>
+                            <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                                <div class="d-flex flex-column">
+                                    <h6 class="mb-3 text-sm">Title: <strong> <?= $article['title'] ?> </strong> </h6>
+                                    <h5 class="mb-2 text-xs">Article Summary: <span class="text-dark font-weight-bold ms-sm-2"><?= $article['summary'] ?></span>
+                                    </h5>
+                                    <h5 class=" mb-2 text-xs w-75">Full Article : <div class="text-dark ms-sm-2 font-weight-bold"><?= $article['full_article'] ?></div>
+                                    </h5>
+                                    <h5 class="text-xs">Created At: <span class="text-dark ms-sm-2 font-weight-bold"><?= $article['created_at'] ?></span>
+                                    </h5>
+                                </div>
+                                <div class="m-auto text-end  w-100">
+                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">delete</i>Delete</a>
+                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">edit</i>Edit</a>
+                                </div>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

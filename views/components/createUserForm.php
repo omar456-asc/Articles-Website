@@ -7,6 +7,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $msg = $useresController
         ->store();
 }
+$db = new MySQLHandler("users");
+$groups = $db->select("groups", "id,name")->where("is_deleted", "=", "0")->getAll();
+require_once('../controllers/UserController.php')
 
 ?>
 

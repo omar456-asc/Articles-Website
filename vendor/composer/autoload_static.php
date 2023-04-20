@@ -38,8 +38,11 @@ class ComposerStaticInit9228bb22e28b840ae1376a6adbaa5099
         'HomeController' => __DIR__ . '/../..' . '/controllers/HomeController.php',
         'Logger' => __DIR__ . '/../..' . '/config/Logger.php',
         'MySQLHandler' => __DIR__ . '/../..' . '/models/MySQLHandler.php',
+        'ProfileController' => __DIR__ . '/../..' . '/controllers/profieController.php',
         'UserController' => __DIR__ . '/../..' . '/controllers/UserController.php',
         'UserFromValidation' => __DIR__ . '/../..' . '/utils/UserFormValidation.php',
+        'config\\Router' => __DIR__ . '/../..' . '/config/Router.php',
+        'filter_interface' => __DIR__ . '/../..' . '/models/filter_interface.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
