@@ -214,7 +214,9 @@ class MySQLHandler implements DBHandler
     }
     public function where($column, $compair, $value)
     {
-        $this->sql  .=  "WHERE `$column` $compair $value;";
+        $this->sql  .=  " WHERE $column $compair '$value' ";
+
+
 
         return $this;
     }
@@ -292,19 +294,21 @@ class MySQLHandler implements DBHandler
         $this->sql = "DELETE FROM `$tabel` ";
         return $this;
     }
+    public function execute()
+    {
+        // print_r($this->sql);
+        // die;
+        $this->debug($this->sql);
 
-    // public function execute()
-    // {
-    //     // print_r($this->sql);
-    //     // die;
-    //     $this->query = mysqli_query($this->conn, $this->sql);
-    //     if (mysqli_affected_rows($this->conn) > 0) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-    public function execute($sql, $params = [])
+        $this->query = mysqli_query($this->conn, $this->sql);
+        if (mysqli_affected_rows($this->conn) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function query($sql, $params = [])
     {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
@@ -313,7 +317,7 @@ class MySQLHandler implements DBHandler
     public function fetchAll($sql, $params = [])
     {
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
+        $stmt->query($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

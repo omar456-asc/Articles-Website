@@ -1,36 +1,17 @@
         <?php
         ob_start(null, 0, PHP_OUTPUT_HANDLER_STDFLAGS ^ PHP_OUTPUT_HANDLER_REMOVABLE);
         require_once('../controllers/UserController.php');
+        $usersController = new UserController();
+        $users = $usersController->index();
 
 
-        $users = $db->select('users', "*")->join('groups', 'users.GroupID', '=', "groups.id")->getALL();
-        $groups = $db->select('groups', '*')->getALL();
+        $groupsController = new GroupController();
+        $groups = $groupsController->index();
 
-        $groupFilter = $_POST['groupFilter'] ?? 'all';
-        $searchFilter = $_POST['searchFilter'] ?? '';
 
-        $sql = "SELECT users.*, groups.name AS `name` FROM users JOIN `groups` ON users.GroupID = groups.id";
-        $params = [];
-
-        // apply group filter if selected
-        if ($groupFilter != 'all') {
-            $sql .= " WHERE GroupID = ?";
-            $params[] = $groupFilter;
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $users =  $usersController->filter();
         }
-
-        // apply search filter if entered
-        if ($searchFilter != '') {
-            if (!empty($params)) {
-                $sql .= " AND";
-            } else {
-                $sql .= " WHERE";
-            }
-            $sql .= " (FirstName LIKE ? OR LastName LIKE ? OR Username LIKE ?)";
-            $params = array_merge($params, ["%$searchFilter%", "%$searchFilter%", "%$searchFilter%"]);
-        }
-
-        // execute the query and fetch the results
-        $users = $db->execute($sql, $params)->fetchAll();
 
 
         ?>
@@ -83,10 +64,10 @@
                             echo '<a class="btn" href="">
                         <i class="fa fa-eye text-black"></i>
                     </a>';
-                            echo '<a class="btn" href="">
+                            echo '<a class="btn" href="../views/editUser.php?userid=' . $user['UserID'] . '">
                         <i class="fa fa-edit text-primary"></i>
                     </a>';
-                            echo '<a class="btn" href="">
+                            echo '<a class="btn" href="../views/deleteUser.php?userid=' . $user['UserID'] . '">
                         <i class="fa fa-close text-danger"></i>
                     </a>';
 

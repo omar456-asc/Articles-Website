@@ -1,8 +1,12 @@
 <?php
 // Get List Of Groups
-$db = new MySQLHandler("users");
-$groups = $db->select("groups", "id,name")->getAll();
-require_once('../controllers/UserController.php')
+$groupsController = new GroupController();
+$groups = $groupsController->index();
+$useresController = new UserController();
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+    $msg = $useresController
+        ->store();
+}
 
 ?>
 
@@ -19,8 +23,8 @@ require_once('../controllers/UserController.php')
                             <?php
                             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
-                                if (!empty($errors)) {
-                                    foreach ($errors as $error) {
+                                if (is_array($msg)) {
+                                    foreach ($msg as $error) {
                                         HelperMethods::alert_massege('danger', $error);
                                     }
                                 } else {
