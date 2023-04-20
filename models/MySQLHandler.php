@@ -48,6 +48,8 @@ class MySQLHandler implements DBHandler
             }
         } catch (Exception $ex) {
             // log();
+            $logger = new Logger();
+            $logger->logException($ex);
             die("Somthing went wrong try again later");
         }
     }
@@ -88,14 +90,14 @@ class MySQLHandler implements DBHandler
 
     private function get_results($sql)
     {
-        $this->debug($sql);
+        // $this->debug($sql);
         $_handler_results = mysqli_query($this->_db_handler, $sql);
         $_arr_results = array();
 
         if ($_handler_results) {
-            // while ($row = mysqli_fetch_array($_handler_results, MYSQLI_ASSOC)) {
-            //     $_arr_results[] = array_change_key_case($row);
-            // }
+            while ($row = mysqli_fetch_array($_handler_results, MYSQLI_ASSOC)) {
+                $_arr_results[] = array_change_key_case($row);
+            }
             $this->disconnect();
             return $_arr_results;
         } else {
@@ -208,10 +210,11 @@ class MySQLHandler implements DBHandler
     }
     public function select($table, $column)
     {
-        $this->sql = "SELECT $column FROM $table ";
+        $this->sql = "SELECT $column FROM `$table`";
 
         return $this;
     }
+
 
     public function where($column, $compair, $value)
     {
@@ -255,6 +258,8 @@ class MySQLHandler implements DBHandler
     }
     public function getALL()
     {
+        $this->debug($this->sql);
+
         $this->query = mysqli_query($this->conn, $this->sql);
         $data = mysqli_fetch_all($this->query, MYSQLI_ASSOC);
 
@@ -263,6 +268,7 @@ class MySQLHandler implements DBHandler
     public function getOne()
     {
         $this->debug($this->sql);
+
         $this->query = mysqli_query($this->conn, $this->sql);
         $data = mysqli_fetch_assoc($this->query);
 
@@ -303,19 +309,19 @@ class MySQLHandler implements DBHandler
         $this->sql = "DELETE FROM `$tabel` ";
         return $this;
     }
+    public function execute()
+    {
+        // print_r($this->sql);
+        // die;
+        $this->query = mysqli_query($this->conn, $this->sql);
+        if (mysqli_affected_rows($this->conn) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    // public function execute()
-    // {
-    //     // print_r($this->sql);
-    //     // die;
-    //     $this->query = mysqli_query($this->conn, $this->sql);
-    //     if (mysqli_affected_rows($this->conn) > 0) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-    public function execute($sql, $params = [])
+    public function query($sql, $params = [])
     {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
@@ -324,7 +330,7 @@ class MySQLHandler implements DBHandler
     public function fetchAll($sql, $params = [])
     {
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
+        $stmt->query($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

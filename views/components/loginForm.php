@@ -28,31 +28,31 @@
                             </div>
                         </div>
                         <div class="card-body">
-                         
-                            <form role="form"  action="/Articles-Website/views/login.php" method="post" class="text-start">
-                            <?php
-                            if ($error) {
-                               
-                                    echo '<div class="alert alert-danger">' . $error . '</div>';
-                               
-                            };
-                            ?>
+
+                            <form role="form" action="../views/login.php" method="post" class="text-start">
+                                <?php
+                                if (!empty($error)) {
+
+                                    echo '<span class=" alert alert-danger">' . $error . '</span>';
+                                };
+                                ?>
                                 <div class="input-group input-group-outline my-3">
-                                   
+
                                     <input type="email" name="email" class="form-control" id="mail" placeholder="Email">
                                 </div>
                                 <div class="input-group input-group-outline mb-3">
-                                  
+
                                     <input type="password" name="password" class="form-control" placeholder="Password">
                                 </div>
                                 <div class="form-check form-switch d-flex align-items-center mb-3">
-                                    <input class="form-check-input" name="rememberMe" type="checkbox" id="rememberMe" >
+                                    <input class="form-check-input" name="rememberMe" type="checkbox" id="rememberMe">
                                     <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit"  class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign
+                                        in</button>
                                 </div>
-                              
+
                             </form>
                         </div>
                     </div>

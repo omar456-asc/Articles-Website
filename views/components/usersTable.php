@@ -1,8 +1,9 @@
         <?php
         require_once('../controllers/UserController.php');
+        $controller = new UserController();
+        $users = $controller->index();
 
 
-        $users = $db->select('users', "*")->join('groups', 'users.GroupID', '=', "groups.id")->getALL();
         $groups = $db->select('groups', '*')->getALL();
 
         $groupFilter = $_POST['groupFilter'] ?? 'all';
@@ -29,7 +30,7 @@
         }
 
         // execute the query and fetch the results
-        $users = $db->execute($sql, $params)->fetchAll();
+        $users = $db->query($sql, $params)->fetchAll();
 
 
         ?>
@@ -37,7 +38,7 @@
             <button class="btn btn-success"> <a style="text-decoration: none; color:white" href="../views/createUser.php">
                     Create New User</a></button>
 
-            <form method="POST ">
+            <form method="POST">
                 <div class="row">
                     <div class="mb-3 col-4">
                         <label for="groupFilter" class="form-label">Filter by Group:</label>
@@ -92,10 +93,10 @@
                             echo '<a class="btn" href="">
                         <i class="fa fa-eye text-black"></i>
                     </a>';
-                            echo '<a class="btn" href="">
+                            echo '<a class="btn" href="../views/editUser.php?userid=' . $user['UserID'] . '">
                         <i class="fa fa-edit text-primary"></i>
                     </a>';
-                            echo '<a class="btn" href="">
+                            echo '<a class="btn" href="../views/deleteUser.php?userid=' . $user['UserID'] . '">
                         <i class="fa fa-close text-danger"></i>
                     </a>';
 
