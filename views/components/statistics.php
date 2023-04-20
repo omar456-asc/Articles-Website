@@ -4,9 +4,12 @@ $homeController = new HomeController();
 $usersCount = $homeController->getUsersCount();
 $groupsCount = $homeController->getGroupsCount();
 $articlesCount = $homeController->getArticlesCount();
+var_dump($groupsCount);
 
 $groups = $homeController->getGroupsName();
+var_dump($groups);
 $groupUsersCount = $homeController->getGroupUsersCount();
+var_dump($groupUsersCount);
 
 ?>
 <div class="container-fluid py-4">

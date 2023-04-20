@@ -33,7 +33,7 @@
                                 <?php
                                 if (!empty($error)) {
 
-                                    echo '<span class=" alert alert-danger">' . $error . '</span>';
+                                    echo '<div class=" alert alert-danger m-auto my-1">' . $error . '</div>';
                                 };
                                 ?>
                                 <div class="input-group input-group-outline my-3">
