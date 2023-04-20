@@ -28,10 +28,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                                     <input type="text" class="form-control m-2" name="groupDescription" id="groupDescription"  value="<?= $group['description']?>">
                                 </div>
                              
-                                <div class=" input-group input-group-outline mb-3 row">
+                                <!-- <div class=" input-group input-group-outline mb-3 row">
                                     <label for="groupImg" class="m-auto col-md-3 "> Group Image : </label>
                                     <input type="file" class="form-control m-3 " name="groupImg" id="groupImg"  value="<?= isset($group['icon']) ? $group['icon']: ' ' ?>">
+                                </div> -->
+                                <div class=" input-group input-group-outline mb-3 row">
+                                    <label for="groupIcon" class="m-auto col-md-3 "> Group Icon Class: </label>
+                                    <input type="text" class="form-control m-3 " name="groupIcon" id="groupIcon">
                                 </div>
+
 
                                 <button name="submit" type="submit" >Submit</button>
 
