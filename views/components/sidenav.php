@@ -31,6 +31,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-white" href="../views/users.php">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">receipt_long</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-white" href="../views/groups.php">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">view_in_ar</i>
@@ -39,23 +47,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="../views/users.php">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Users</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="../views/articles.php">
+                    <a class="nav-link text-white" href="../pages/rtl.html">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
                         </div>
-                        <span class="nav-link-text ms-1">Articles</span>
+                        <span class="nav-link-text ms-1">RTL</span>
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="../pages/notifications.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">notifications</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Notifications</span>
+                    </a>
+                </li>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
                         Account pages
@@ -69,16 +75,22 @@
                         <span class="nav-link-text ms-1">Profile</span>
                     </a>
                 </li>
-                <!-- login link  -->
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="../views/logout.php">
+                    <a class="nav-link text-white" href="../pages/sign-in.html">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">login</i>
                         </div>
-                        <span class="nav-link-text ms-1"> Log out</span>
+                        <span class="nav-link-text ms-1">Sign In</span>
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="../views/createUser.php">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">assignment</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Create User</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </aside>

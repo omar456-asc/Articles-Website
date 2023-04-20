@@ -29,3 +29,4 @@ if (!isset($_SESSION['loggedin'])) {
 } else {
     header("Location: views/home.php");
 }
+// Path: index.php
