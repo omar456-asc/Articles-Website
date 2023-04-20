@@ -4,6 +4,7 @@ $groups = $groupsController->index();
 
 $userscontroller = new UserController();
 $userid = intval($_GET['userid']);
+$user_data = $userscontroller->show($userid);
 $id = $user_data['UserID'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateUser'])) {
