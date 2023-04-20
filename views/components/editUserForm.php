@@ -1,21 +1,26 @@
 <?php
-require_once('../controllers/UserController.php');
+$groupsController = new GroupController();
+$groups = $groupsController->index();
 
-// if (isset($_GET['userid'])) {
-$db = new MySQLHandler("groups");
+$userscontroller = new UserController();
 $userid = intval($_GET['userid']);
-
-$controller = new UserController();
-$user_data = $controller->show($userid);
 $id = $user_data['UserID'];
-$groups = $db->select("groups", "id,name")->getAll();
-// }
-// var_dump($user_data);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateUser'])) {
-    $controller->update($userid);
-    HelperMethods::alert_massege('success', "User Updated successfully");
+    $msg =   $userscontroller->update($userid, $user_data);
+    var_dump($msg);
+    if (is_array($msg)) {
+        foreach ($msg as $error) {
+            HelperMethods::alert_massege('danger', $error);
+        }
+    } else {
+        HelperMethods::alert_massege('success ', $msg);
+    }
 }
+
+
+$user_data = $userscontroller->show($userid);
+
 
 
 ?>

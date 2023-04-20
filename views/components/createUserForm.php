@@ -1,10 +1,12 @@
 <?php
 require_once('../controllers/UserController.php');
 // Get List Of Groups
-$groups = $db->select("groups", "id,name")->getAll();
-$controller = new UserController();
+$groupsController = new GroupController();
+$groups = $groupsController->index();
+$useresController = new UserController();
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    $controller->store();
+    $msg = $useresController
+        ->store();
 }
 
 ?>
@@ -22,8 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                             <?php
                             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
-                                if (!empty($errors)) {
-                                    foreach ($errors as $error) {
+                                if (is_array($msg)) {
+                                    foreach ($msg as $error) {
                                         HelperMethods::alert_massege('danger', $error);
                                     }
                                 } else {

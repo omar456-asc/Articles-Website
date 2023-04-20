@@ -1,36 +1,19 @@
         <?php
         require_once('../controllers/UserController.php');
-        $controller = new UserController();
-        $users = $controller->index();
+        $usersController = new UserController();
+        $users = $usersController->index();
 
 
+        $users = $db->select('users', "*")->join('groups', 'users.GroupID', '=', "groups.id")->getALL();
         $groups = $db->select('groups', '*')->getALL();
 
-        $groupFilter = $_POST['groupFilter'] ?? 'all';
-        $searchFilter = $_POST['searchFilter'] ?? '';
 
-        $sql = "SELECT users.*, groups.name AS `name` FROM users JOIN `groups` ON users.GroupID = groups.id";
-        $params = [];
-
-        // apply group filter if selected
-        if ($groupFilter != 'all') {
-            $sql .= " WHERE GroupID = ?";
-            $params[] = $groupFilter;
-        }
-
-        // apply search filter if entered
-        if ($searchFilter != '') {
-            if (!empty($params)) {
-                $sql .= " AND";
-            } else {
-                $sql .= " WHERE";
-            }
-            $sql .= " (FirstName LIKE ? OR LastName LIKE ? OR Username LIKE ?)";
-            $params = array_merge($params, ["%$searchFilter%", "%$searchFilter%", "%$searchFilter%"]);
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $users =  $usersController->filter();
         }
 
         // execute the query and fetch the results
-        $users = $db->query($sql, $params)->fetchAll();
+        $users = $db->execute($sql, $params)->fetchAll();
 
 
         ?>
