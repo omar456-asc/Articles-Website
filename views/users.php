@@ -4,7 +4,7 @@ $db = new MySQLHandler("users");
 
 require_once('components/header.php');
 
-require_once('components/authmiddleware.php');
+require_once('components/authMiddleware.php');
 
 
 require_once('components/sidenav.php');
