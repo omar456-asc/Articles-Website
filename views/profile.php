@@ -1,6 +1,7 @@
 <?php
 require_once("../vendor/autoload.php");
 
+$title = "Profile";
 require_once('components/header.php');
 
 

@@ -1,5 +1,4 @@
     <?php
-
     ?>
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
         <div class="sidenav-header">
@@ -18,7 +17,7 @@
                     </div>
                     <div class="info">
                         <h5 href="#" class="d-block text-white">Hello , <?= ucwords($_SESSION['user_name']) ?></h5>
-                        <small class=" text-white"> Group : <?= $_SESSION['group_id'] ?></small>
+                        <small class=" text-white"> Group : <?= $_SESSION['group_name'] ?></small>
                     </div>
                 </div>
                 <hr class="horizontal light mt-0 mb-2" />
@@ -54,14 +53,19 @@
                         <span class="nav-link-text ms-1">RTL</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="../pages/notifications.html">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">notifications</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Notifications</span>
-                    </a>
-                </li>
+                <?php if ($_SESSION['group_name'] == "Admins" || $_SESSION['group_name'] == "Editors") {
+                ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../views/articles.php">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Articles</span>
+                        </a>
+                    </li>
+                <?php } ?>
+
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
                         Account pages

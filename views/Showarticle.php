@@ -1,6 +1,6 @@
 <?php
 require_once("../vendor/autoload.php");
-
+$title = "Articles";
 require_once('components/header.php');
 
 require_once('components/adminEditorMiddleware.php');

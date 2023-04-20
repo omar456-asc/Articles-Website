@@ -1,5 +1,6 @@
 <?php
 require_once("../vendor/autoload.php");
+$title = "Users";
 
 require_once('components/header.php');
 
