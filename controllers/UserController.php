@@ -11,14 +11,13 @@ class UserController
     {
         $users = $this->db->select('users', '*')
             ->join('groups', 'users.GroupID', '=', "groups.id")
-            ->having('IsDeleted', '=', 0)
+            ->where('IsDeleted', '=', 0)
             ->getALL();
         return $users;
     }
     public function store()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-            require_once('../utils/UserFormValidation.php');
             $userName = $_POST['username'];
             $email = $_POST['useremail'];
             $password = $_POST['password'];
@@ -38,13 +37,18 @@ class UserController
                 $userImg
             );
             $errors = $validateUser->get_errors();
-            $UserDate = $validateUser->get_create_user_data();
-            $this->db->save($UserDate);
+            if (count($errors) <= 0) {
+                $UserData = $validateUser->get_create_user_data();
+                $this->db->save($UserData);
+                return "User Created Successfully";
+            } else {
+                return $errors;
+            }
         }
     }
-    public function update($userID)
+    public function update($userID, $user_data)
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateUser'])) {
             require_once('../utils/UserFormValidation.php');
             $userName = $_POST['username'];
             $email = $_POST['useremail'];
@@ -53,7 +57,7 @@ class UserController
             $lastName = $_POST['lastname'];
             $phoneNumber = $_POST['phone'];
             $group = $_POST['group'];
-            $userImg = $_FILES['userimg'];
+            $userImg['name'] =  $user_data['avatar'];
             $validateUser = new UserFromValidation(
                 $userName,
                 $email,
@@ -65,18 +69,26 @@ class UserController
                 $userImg
             );
             $errors = $validateUser->get_errors();
-            $UserDate = $validateUser->get_create_user_data();
-            $this->db->updateDB('users', $UserDate)->where('UserID', '=', $userID)->execute();
+            if (count($errors) <= 0) {
+                $userData = $validateUser->get_create_user_data();
+                $this->db->updateDB("users", $userData)
+                    ->where('UserID', '=', $userID)
+                    ->execute();
+
+                if (isset($_GET['action']) && $_GET['action'] == 'delete') {
+                    return "User Edited Successfully";
+                } else {
+                    return $errors;
+                }
+            }
         }
     }
     public function delete($userID)
     {
-        $this->db->updateDB('users', ['IsDeleted' => '1'])->where('UserID', '=', $userID)->execute();
+        $this->db->updateDB('users', ['IsDeleted' => '1'])
+            ->where('UserID', '=', $userID)
+            ->execute();
         $page = $_SERVER['PHP_SELF'];
-
-        echo '<script type="text/javascript">';
-        echo 'window.location.href = "../views/users.php";';
-        echo '</script>';
     }
     public function show($userID)
     {
@@ -85,5 +97,32 @@ class UserController
             ->where('UserID', '=', $userID)
             ->getOne();
         return $user;
+    }
+    public function filter()
+    {
+        $groupFilter = $_POST['groupFilter'] ?? 'all';
+        $searchFilter = $_POST['searchFilter'] ?? '';
+
+        $sql = "SELECT users.*, groups.name AS `name` FROM users JOIN `groups` ON users.GroupID = groups.id";
+        $params = [];
+        if ($groupFilter != 'all') {
+            $sql .= " WHERE GroupID = ?";
+            $params[] = $groupFilter;
+        }
+
+        // apply search filter if entered
+        if ($searchFilter != '') {
+            if (!empty($params)) {
+                $sql .= " AND";
+            } else {
+                $sql .= " WHERE";
+            }
+            $sql .= " (FirstName LIKE ? OR LastName LIKE ? OR Username LIKE ?)";
+            $params = array_merge($params, ["%$searchFilter%", "%$searchFilter%", "%$searchFilter%"]);
+        }
+
+        // execute the query and fetch the results
+        $users = $this->db->query($sql, $params)->fetchAll();
+        return $users;
     }
 }
