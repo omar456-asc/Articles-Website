@@ -27,4 +27,10 @@ class HelperMethods
         $date = implode(", ", $date);
         return $date;
     }
+    public static  function isActiveLink($title, $pageTitle)
+    {
+        if ($title == $pageTitle) {
+            return "active bg-gradient-primary";
+        }
+    }
 }
