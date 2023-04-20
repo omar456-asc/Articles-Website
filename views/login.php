@@ -39,7 +39,7 @@ function validate_form()
         //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
        
        
-       $user=$db->select(" users "," * ")-> join('groups', 'users.GroupID', '=', "groups.id")->where(" Email "," = ",$email)->andWhere(" Password "," = ",$password)->getOne();
+       $user=$db->select("users"," * ")-> join('groups', 'users.GroupID', '=', "groups.id")->where(" Email "," = ",$email)->andWhere(" Password "," = ",$password)->getOne();
        if($user)
        {
         $_SESSION["user_id"]=$user["UserID"];
