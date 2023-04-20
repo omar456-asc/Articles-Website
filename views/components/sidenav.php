@@ -1,10 +1,14 @@
     <?php
 
     ?>
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
+    <aside
+        class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+        id="sidenav-main">
         <div class="sidenav-header">
-            <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
+            <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+                aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
+                target="_blank">
                 <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo" />
                 <span class="ms-1 font-weight-bold text-white">Articals Website</span>
             </a>
@@ -14,7 +18,8 @@
             <ul class="navbar-nav">
                 <div class="user-panel mt-1  mb-1   text-center">
                     <div style="width: 120px;" class=" image  d-flex m-auto ">
-                        <img w src=" ../assets/img/bruce-mars.jpg" class="rounded-circle img-fluid   shadow-4" alt="User Image">
+                        <img w src=" ../assets/img/bruce-mars.jpg" class="rounded-circle img-fluid   shadow-4"
+                            alt="User Image">
                     </div>
                     <div class="info">
                         <h5 href="#" class="d-block text-white">Hello , <?= ucwords($_SESSION['user_name']) ?></h5>
