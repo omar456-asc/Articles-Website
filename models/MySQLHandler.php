@@ -323,12 +323,6 @@ class MySQLHandler implements DBHandler
         }
     }
 
-    public function execute($sql, $params = [])
-    {
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt;
-    }
     public function fetchAll($sql, $params = [])
     {
         $stmt = $this->pdo->prepare($sql);
