@@ -53,7 +53,6 @@ class ArticleFormValidation{
         }elseif(!strstr($image["type"], 'image')){
             array_push($this->errors, "File Type Is Not Supported ");
         }else {
-            var_dump($image);
              $dist = "../assets/img/articles/".$this->title.".jpg";
              move_uploaded_file($image['tmp_name'], $dist);
 
@@ -104,4 +103,3 @@ class ArticleFormValidation{
     }
 
 }
-?>

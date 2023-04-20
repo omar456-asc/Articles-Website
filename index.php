@@ -21,7 +21,6 @@ if (!isset($_SESSION['loggedin'])) {
         foreach ($data as $k => $v) {
             $_SESSION[$k] = $v;
         }
-        var_dump($data);
         header("Location: views/home.php");
     } else {
         header("Location: views/login.php");
