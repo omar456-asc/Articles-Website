@@ -10,6 +10,7 @@ return array(
     'ArticleFormValidation' => $baseDir . '/utils/ArticleFormValidation.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'ContainFilter' => $baseDir . '/models/containFilter.php',
+    'ContainFilter' => $baseDir . '/models/containFilter.php',
     'DBHandler' => $baseDir . '/models/DBHandler.php',
     'GroupController' => $baseDir . '/controllers/GroupController.php',
     'GroupFromValidation' => $baseDir . '/utils/GroupFormValidation.php',
@@ -19,6 +20,5 @@ return array(
     'MySQLHandler' => $baseDir . '/models/MySQLHandler.php',
     'UserController' => $baseDir . '/controllers/UserController.php',
     'UserFromValidation' => $baseDir . '/utils/UserFormValidation.php',
-    'config\\Router' => $baseDir . '/config/Router.php',
     'filter_interface' => $baseDir . '/models/filter_interface.php',
 );

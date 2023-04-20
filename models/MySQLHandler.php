@@ -313,7 +313,6 @@ class MySQLHandler implements DBHandler
     {
         // print_r($this->sql);
         // die;
-        $this->debug($this->sql);
         $this->query = mysqli_query($this->conn, $this->sql);
         if (mysqli_affected_rows($this->conn) > 0) {
             return true;

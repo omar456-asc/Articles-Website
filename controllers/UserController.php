@@ -37,13 +37,8 @@ class UserController
                 $userImg
             );
             $errors = $validateUser->get_errors();
-            if (count($errors) <= 0) {
-                $UserData = $validateUser->get_create_user_data();
-                $this->db->save($UserData);
-                return "User Created Successfully";
-            } else {
-                return $errors;
-            }
+            $UserDate = $validateUser->get_create_user_data();
+            $this->db->save($UserDate);
         }
     }
     public function update($userID, $user_data)
@@ -69,26 +64,18 @@ class UserController
                 $userImg
             );
             $errors = $validateUser->get_errors();
-            if (count($errors) <= 0) {
-                $userData = $validateUser->get_create_user_data();
-                $this->db->updateDB("users", $userData)
-                    ->where('UserID', '=', $userID)
-                    ->execute();
-
-                if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-                    return "User Edited Successfully";
-                } else {
-                    return $errors;
-                }
-            }
+            $UserDate = $validateUser->get_create_user_data();
+            $this->db->updateDB('users', $UserDate)->where('UserID', '=', $userID)->execute();
         }
     }
     public function delete($userID)
     {
-        $this->db->updateDB('users', ['IsDeleted' => '1'])
-            ->where('UserID', '=', $userID)
-            ->execute();
+        $this->db->updateDB('users', ['IsDeleted' => '1'])->where('UserID', '=', $userID)->execute();
         $page = $_SERVER['PHP_SELF'];
+
+        echo '<script type="text/javascript">';
+        echo 'window.location.href = "../views/users.php";';
+        echo '</script>';
     }
     public function show($userID)
     {
