@@ -9,7 +9,7 @@ $id = $user_data['UserID'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateUser'])) {
     $msg =   $userscontroller->update($userid, $user_data);
-    var_dump($msg);
+    //var_dump($msg);
     if (is_array($msg)) {
         foreach ($msg as $error) {
             HelperMethods::alert_massege('danger', $error);
