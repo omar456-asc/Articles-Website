@@ -30,14 +30,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="../views/users.php">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Users</span>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link text-white" href="../views/groups.php">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">view_in_ar</i>
@@ -46,11 +38,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="../pages/rtl.html">
+                    <a class="nav-link text-white" href="../views/users.php">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+                            <i class="material-icons opacity-10">receipt_long</i>
                         </div>
-                        <span class="nav-link-text ms-1">RTL</span>
+                        <span class="nav-link-text ms-1">Users</span>
                     </a>
                 </li>
                 <?php if ($_SESSION['group_name'] == "Admins" || $_SESSION['group_name'] == "Editors") {
@@ -79,22 +71,16 @@
                         <span class="nav-link-text ms-1">Profile</span>
                     </a>
                 </li>
+                <!-- login link  -->
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="../pages/sign-in.html">
+                    <a class="nav-link text-white" href="../views/logout.php">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">login</i>
                         </div>
-                        <span class="nav-link-text ms-1">Sign In</span>
+                        <span class="nav-link-text ms-1"> Log out</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="../views/createUser.php">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">assignment</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Create User</span>
-                    </a>
-                </li>
+
             </ul>
         </div>
     </aside>
