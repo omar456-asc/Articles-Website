@@ -19,4 +19,12 @@ class HelperMethods
             return "";
         }
     }
+
+    public static  function formatDate($date)
+    {
+        $date = getdate(strtotime($date));
+        $date = [$date['mday'], $date['month'], $date['year']];
+        $date = implode(", ", $date);
+        return $date;
+    }
 }

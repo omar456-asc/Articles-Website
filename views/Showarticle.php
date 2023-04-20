@@ -8,3 +8,6 @@ require_once('components/navbar.php');
 require_once("components/showArticle.php");
 
 require_once('components/footer.php');
+require_once('components/footer.php');
+
+require_once('components/footer.php');
