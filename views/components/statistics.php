@@ -4,12 +4,9 @@ $homeController = new HomeController();
 $usersCount = $homeController->getUsersCount();
 $groupsCount = $homeController->getGroupsCount();
 $articlesCount = $homeController->getArticlesCount();
-var_dump($groupsCount);
 
 $groups = $homeController->getGroupsName();
-var_dump($groups);
 $groupUsersCount = $homeController->getGroupUsersCount();
-var_dump($groupUsersCount);
 
 ?>
 <div class="container-fluid py-4">
@@ -17,7 +14,8 @@ var_dump($groupUsersCount);
         <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
             <div class="card">
                 <div class="card-header p-3 pt-2">
-                    <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                    <div
+                        class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
                         <i class="material-icons opacity-10">weekend</i>
                     </div>
                     <div class="text-end pt-1">
@@ -31,7 +29,8 @@ var_dump($groupUsersCount);
         <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
             <div class="card">
                 <div class="card-header p-3 pt-2">
-                    <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                    <div
+                        class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
                         <i class="material-icons opacity-10">person</i>
                     </div>
                     <div class="text-end pt-1">
@@ -46,7 +45,8 @@ var_dump($groupUsersCount);
         <div class="col-xl-4 col-sm-6">
             <div class="card">
                 <div class="card-header p-3 pt-2">
-                    <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                    <div
+                        class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
                         <i class="material-icons opacity-10">weekend</i>
                     </div>
                     <div class="text-end pt-1">
@@ -59,7 +59,7 @@ var_dump($groupUsersCount);
         </div>
     </div>
     <!-- Chart -->
-    <div class="row mt-4">
+    <div class="row m-2">
         <div class="col-lg-12 col-md-6 mt-4 mb-4">
             <div class="card z-index-2 ">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -84,87 +84,87 @@ var_dump($groupUsersCount);
 <script src="../assets/js/plugins/chartjs.min.js"></script>
 
 <script>
-    const groupsText = "<?= $groups ?>";
-    groupsName = groupsText.split(",")
-    const countText = "<?= $groupUsersCount ?>";
-    groupUsersCount = countText.split(",")
-    // alert(groupsName);
-    var ctx = document.getElementById("chart-bars").getContext("2d");
-    new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: groupsName,
-            datasets: [{
-                label: "Users",
-                tension: 0.4,
-                borderWidth: 0,
-                borderRadius: 4,
-                borderSkipped: false,
-                backgroundColor: "rgba(255, 255, 255, .8)",
-                data: groupUsersCount,
-                maxBarThickness: 6
-            }, ],
+const groupsText = "<?= $groups ?>";
+groupsName = groupsText.split(",")
+const countText = "<?= $groupUsersCount ?>";
+groupUsersCount = countText.split(",")
+// alert(groupsName);
+var ctx = document.getElementById("chart-bars").getContext("2d");
+new Chart(ctx, {
+    type: "bar",
+    data: {
+        labels: groupsName,
+        datasets: [{
+            label: "Users",
+            tension: 0.4,
+            borderWidth: 0,
+            borderRadius: 4,
+            borderSkipped: false,
+            backgroundColor: "rgba(255, 255, 255, .8)",
+            data: groupUsersCount,
+            maxBarThickness: 6
+        }, ],
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false,
+            }
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false,
+        interaction: {
+            intersect: false,
+            mode: 'index',
+        },
+        scales: {
+            y: {
+                grid: {
+                    drawBorder: false,
+                    display: true,
+                    drawOnChartArea: true,
+                    drawTicks: false,
+                    borderDash: [5, 5],
+                    color: 'rgba(255, 255, 255, .2)'
+                },
+                ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 500,
+                    beginAtZero: true,
+                    padding: 10,
+                    font: {
+                        size: 14,
+                        weight: 300,
+                        family: "Roboto",
+                        style: 'normal',
+                        lineHeight: 2
+                    },
+                    color: "#fff"
+                },
+            },
+            x: {
+                grid: {
+                    drawBorder: false,
+                    display: true,
+                    drawOnChartArea: true,
+                    drawTicks: false,
+                    borderDash: [5, 5],
+                    color: 'rgba(255, 255, 255, .2)'
+                },
+                ticks: {
+                    display: true,
+                    color: '#f8f9fa',
+                    padding: 10,
+                    font: {
+                        size: 14,
+                        weight: 300,
+                        family: "Roboto",
+                        style: 'normal',
+                        lineHeight: 2
+                    },
                 }
             },
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                    grid: {
-                        drawBorder: false,
-                        display: true,
-                        drawOnChartArea: true,
-                        drawTicks: false,
-                        borderDash: [5, 5],
-                        color: 'rgba(255, 255, 255, .2)'
-                    },
-                    ticks: {
-                        suggestedMin: 0,
-                        suggestedMax: 500,
-                        beginAtZero: true,
-                        padding: 10,
-                        font: {
-                            size: 14,
-                            weight: 300,
-                            family: "Roboto",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                        color: "#fff"
-                    },
-                },
-                x: {
-                    grid: {
-                        drawBorder: false,
-                        display: true,
-                        drawOnChartArea: true,
-                        drawTicks: false,
-                        borderDash: [5, 5],
-                        color: 'rgba(255, 255, 255, .2)'
-                    },
-                    ticks: {
-                        display: true,
-                        color: '#f8f9fa',
-                        padding: 10,
-                        font: {
-                            size: 14,
-                            weight: 300,
-                            family: "Roboto",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                    }
-                },
-            },
         },
-    });
+    },
+});
 </script>

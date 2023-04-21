@@ -52,6 +52,8 @@ function validate_form()
                 'loggedin' => true,
                 'user_id' => $user["UserID"],
                 'group_id' => $user["name"],
+                'group_name' => $user["name"],
+
                 "user_name" => $user["Username"],
                 "last_visit" => HelperMethods::formatDate($user['LastVisit']),
                 "avatar" => $user["avatar"],

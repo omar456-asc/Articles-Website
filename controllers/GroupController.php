@@ -1,4 +1,3 @@
-
 <?php
 //require_once('../utils/GroupFormValidation.php');
 
@@ -31,7 +30,6 @@ class GroupController
         );
         $errors =$validateGroup->get_errors();
         if(count($errors) > 0) {
-            //var_dump($errors);
         } else {
            
             $groupData = $validateGroup->create_group_data();

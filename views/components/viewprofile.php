@@ -8,15 +8,14 @@ $articles = $profileController->getUserArticles();
 
 ?>
 
-<div class="page-header min-height-300 border-radius-xl mt-4"
-    style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+<div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
     <span class="mask  bg-gradient-primary  opacity-6"></span>
 </div>
 <div class="card card-body mx-3 mx-md-4 mt-n6">
     <div class="row gx-4 mb-2">
         <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-                <img src="../assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                <img src="../storage/Images/<?= $user['avatar'] ?>" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
             </div>
         </div>
         <div class="col-auto my-auto">
@@ -121,21 +120,18 @@ $articles = $profileController->getUserArticles();
                         if (empty($articles))
                             echo "<h4 class='text-center'> No Articles yet</h4>";
                         foreach ($articles as $article) { ?>
-                        <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
-                            <div class="d-flex flex-column">
-                                <h6 class="mb-3 text-sm">Title: <strong> <?= $article['title'] ?> </strong> </h6>
-                                <h5 class="mb-2 text-xs">Article Summary: <span
-                                        class="text-dark font-weight-bold ms-sm-2"><?= $article['summary'] ?></span>
-                                </h5>
-                                <h5 class=" mb-2 text-xs w-75">Full Article : <div
-                                        class="text-dark ms-sm-2 font-weight-bold"><?= $article['full_article'] ?></div>
-                                </h5>
-                                <h5 class="text-xs">Created At: <span
-                                        class="text-dark ms-sm-2 font-weight-bold"><?= $article['created_at'] ?></span>
-                                </h5>
-                            </div>
+                            <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                                <div class="d-flex flex-column">
+                                    <h6 class="mb-3 text-sm">Title: <strong> <?= $article['title'] ?> </strong> </h6>
+                                    <h5 class="mb-2 text-xs">Article Summary: <span class="text-dark font-weight-bold ms-sm-2"><?= $article['summary'] ?></span>
+                                    </h5>
+                                    <h5 class=" mb-2 text-xs w-75">Full Article : <div class="text-dark ms-sm-2 font-weight-bold"><?= $article['full_article'] ?></div>
+                                    </h5>
+                                    <h5 class="text-xs">Created At: <span class="text-dark ms-sm-2 font-weight-bold"><?= $article['created_at'] ?></span>
+                                    </h5>
+                                </div>
 
-                        </li>
+                            </li>
                         <?php } ?>
                     </ul>
                 </div>
