@@ -37,16 +37,10 @@ class UserController
                 $userImg
             );
             $errors = $validateUser->get_errors();
-            // var_dump(count($errors));
             if (count($errors) <= 0) {
                 $UserData = $validateUser->get_create_user_data();
-                //var_dump($UserData);
-                //var_dump($UserData['Phone']);
                 $imagePath = $_SERVER['DOCUMENT_ROOT'] . '/Articles-Website/storage/Images/' . $UserData['avatar'];
-                //var_dump($imagePath);
 
-                $result = HelperMethods::upload_file($userImg, $imagePath);
-                //echo $result;
                 if (move_uploaded_file($UserData['avatar'], $imagePath)) {
                     // File was successfully uploaded, save user data to database
                     $this->db->save($UserData);

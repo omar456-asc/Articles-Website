@@ -252,7 +252,6 @@ class MySQLHandler implements DBHandler
     public function groupBy($column)
     {
         $this->sql  .=  " GROUP BY `$column`; ";
-        // var_dump($this->sql);
 
         return $this;
     }
