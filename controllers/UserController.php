@@ -41,6 +41,7 @@ class UserController
                 $UserData = $validateUser->get_create_user_data();
                 $imagePath = $_SERVER['DOCUMENT_ROOT'] . '/Articles-Website/storage/Images/' . $UserData['avatar'];
 
+                HelperMethods::upload_file($userImg, $imagePath);
                 if (move_uploaded_file($UserData['avatar'], $imagePath)) {
                     // File was successfully uploaded, save user data to database
                     $this->db->save($UserData);
