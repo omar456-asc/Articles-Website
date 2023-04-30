@@ -17,11 +17,12 @@ class ArticleController{
     }
     public function store()
     {
+        $date = date('Y-m-d H:i:s');
         $title = $_POST['title'];
         $summary = $_POST['summary'];
         $articleImg = $_FILES['image'];
         $full_article = $_POST['full_article'];
-    // $publising_date = $_POST['publising_date'];
+        $publising_date = $date;
         $user_id = $_POST['user_id'];
 
         $validateArticle = new ArticleFormValidation(
@@ -29,6 +30,7 @@ class ArticleController{
             $summary,
             $articleImg,
             $full_article,
+            $publising_date,
             $user_id
         );
 
