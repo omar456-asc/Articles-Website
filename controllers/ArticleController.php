@@ -51,10 +51,13 @@ class ArticleController{
 
 public function delete($ArticleId){
     
-    $deleted = $this->db->soft_delete('articles', $ArticleId);
-    return $deleted;
-}
+    $this->db->updateDB('articles', ['is_deleted' => '1'])
+    ->where('id', '=', $ArticleId)
+    ->execute();
+    $page = $_SERVER['PHP_SELF'];
 
+
+}
 }
 
 

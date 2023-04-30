@@ -307,23 +307,18 @@ class MySQLHandler implements DBHandler
         return $this;
     }
 
-    // public function execute()
-    // {
-    //     // print_r($this->sql);
-    //     // die;
-    //     $this->query = mysqli_query($this->conn, $this->sql);
-    //     if (mysqli_affected_rows($this->conn) > 0) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-    public function execute($sql, $params = [])
+    public function execute()
     {
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt;
+        // print_r($this->sql);
+        // die;
+        $this->query = mysqli_query($this->conn, $this->sql);
+        if (mysqli_affected_rows($this->conn) > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
+ 
     public function fetchAll($sql, $params = [])
     {
         $stmt = $this->pdo->prepare($sql);

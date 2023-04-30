@@ -34,7 +34,7 @@ $articles= $Artcontroller->index();
                 <a class="btn" <?="href='../views/Showarticle.php?ArticleId={$article['id']}' ";?>>
                         <i class="fa fa-eye text-black"></i>
                     </a>
-                <a class="btn" href="">
+                <a class="btn" <?="href='../views/deleteArticle.php?ArticleId={$article['id']}' ";?>>
                         <i class="fa fa-close text-danger"></i>
                     </a>
 
