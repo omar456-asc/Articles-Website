@@ -11,18 +11,17 @@ class ArticleController{
     }
     public function index(){
         $articles = $this->db->select('articles', "*")->where('is_deleted','=',0)->getALL();
-        //var_dump($articles);
         return $articles;
 
     }
     public function store()
     {
-        $date = date('Y-m-d H:i:s');
+        //$timestamp = strtotime(date('Y-m-d H:i:s'));
         $title = $_POST['title'];
         $summary = $_POST['summary'];
         $articleImg = $_FILES['image'];
         $full_article = $_POST['full_article'];
-        $publising_date = $date;
+        //$publising_date = strtotime($_POST[date('Y-m-d H:i:s')]);
         $user_id = $_POST['user_id'];
 
         $validateArticle = new ArticleFormValidation(
@@ -30,7 +29,6 @@ class ArticleController{
             $summary,
             $articleImg,
             $full_article,
-            $publising_date,
             $user_id
         );
 
@@ -47,7 +45,7 @@ class ArticleController{
 
     public function show($ArticleId)
 {
-    $articles = $this->db->select("articles", "*") ->where('id', '=', $ArticleId)->getOne();
+    $articles = $this->db->select("articles", "*") ->join('users', 'users.UserID', '=', "articles.user_id")->where('id', '=', $ArticleId)->getOne();
     return $articles;
 }
 

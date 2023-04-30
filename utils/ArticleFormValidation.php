@@ -6,14 +6,16 @@ class ArticleFormValidation{
     private $summary;
     private $image;
     private $full_article;
+    //public  $publising_date;
     private $user_id;
 
-    public function __construct($title, $summary, $image,$full_article,$user_id)
+    public function __construct($title, $summary, $image,$full_article, $user_id)
     {
         $this->title = $title ? $title : "";
         $this->summary = $summary ? $summary : "";
         $this->image = $image ? $image : "";
         $this->full_article = $full_article ? $full_article : "";
+       // $this-> $publising_date =  $publising_date ?  $publising_date:"";
         $this->user_id = $user_id? $user_id : "";
     }
     public function validate_title($title){
@@ -39,7 +41,7 @@ class ArticleFormValidation{
         }elseif(!strstr($image["type"], 'image')){
             array_push($this->errors, "File Type Is Not Supported ");
         }else {
-            var_dump($image);
+            //var_dump($image);
              $dist = "../assets/img/articles/".$this->title.".jpg";
              move_uploaded_file($image['tmp_name'], $dist);
 
@@ -55,7 +57,17 @@ class ArticleFormValidation{
             array_push($this->errors,"Article content can't be more than".MAX_FULL_ARTICLE_LENGTH." Characters");
         }
     }
-
+    // public function Validate_publishDate($publising_date){
+    //     if (!empty($_POST['publising_date'])) {
+    //         $publising_date = date('Y-m-d H:i:s',$_POST['publising_date']);
+    //         $publising_date = new DateTime($publising_date);
+    //     } else {
+    //         // Set a default publishing date
+    //         $publising_date = date('Y-m-d H:i:s');
+    //         $publising_date = new DateTime($publising_date);
+    //     }
+    //     var_dump($publising_date);
+    // }
     public function validate_userID($user_id)
     {
         if (empty($user_id)) {
@@ -68,6 +80,7 @@ class ArticleFormValidation{
         $this->validate_summary($this->summary);
         $this->validate_image($this->image);
         $this->validate_fullArticle($this->full_article);
+      //  $this->Validate_publishDate($this->publising_date);
         $this->validate_userID($this->user_id);
     }
     public function get_errors()
@@ -84,6 +97,7 @@ class ArticleFormValidation{
                 "summary" => $this->summary,
                 "image" => $this->title.'.jpg',
                 "full_article" => $this->full_article,
+               // "publishing_date"=>$this->publising_date.implode(',',["date"]),
                 "user_id" => $this->user_id
             ];
         }

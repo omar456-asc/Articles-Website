@@ -4,6 +4,11 @@ $articleId= intval($_GET['ArticleId']);
 $Artcontroller = new ArticleController();
 $article = $Artcontroller->show($articleId);
 
+$timestamp = strtotime($article['publishing_date']); // convert string to Unix timestamp
+
+// format the date in a readable format
+$formattedDate = date('F j, Y, g:i a', $timestamp);
+
 ?>
 <!-- src="../../assets/img/articles/'<?=$article['image']?>'" -->
 <!-- Main content -->
@@ -22,6 +27,14 @@ $article = $Artcontroller->show($articleId);
                 </div>
             </div>
             <div class="card text-bg-light mb-3">
+                <h4 class="col-12 fw-bold card-header"><strong>Summary</strong></h4>
+                <div class="card-body">
+                    <div>
+                        <p class="lead"><?= $article['summary'] ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card text-bg-light mb-3">
                 <h4 class="col-12 fw-bold card-header"><strong>Content</strong></h4>
                 <div class="card-body">
                     <div>
@@ -30,10 +43,18 @@ $article = $Artcontroller->show($articleId);
                 </div>
             </div>
             <div class="card text-bg-light mb-3">
-                <h4 class="col-12 fw-bold card-header"><strong>Summary</strong></h4>
+                <h4 class="col-12 fw-bold card-header"><strong>Written by</strong></h4>
                 <div class="card-body">
                     <div>
-                        <p class="lead"><?= $article['summary'] ?></p>
+                        <p class="fs-5"><?= $article['Username'] ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card text-bg-light mb-3">
+                <h4 class="col-12 fw-bold card-header"><strong>Published At</strong></h4>
+                <div class="card-body">
+                    <div>
+                        <p class="fs-5"><?= $formattedDate ?></p>
                     </div>
                 </div>
             </div>

@@ -2,8 +2,6 @@
 require_once('../controllers/ArticleController.php');
 $Artcontroller = new ArticleController();
 $articles= $Artcontroller->index();
-// $db = new MySQLHandler("articles");
-// $articles = $db->select('articles', "*")->getALL();
 ?>
 <div class="p-3">
 <button class="btn btn-primary"> <a style="text-decoration: none; color:white" href="../views/addArticle.php"> Add Article</a></button>
