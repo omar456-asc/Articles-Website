@@ -1,5 +1,4 @@
 <?php
-//$groups = $db->select('groups', '*')->getALL();
 
 $controller = new GroupController();
 $groups = $controller->index();
@@ -10,48 +9,38 @@ $descriptionFilter = $_POST['descriptionFilter'] ?? '';
 $noMatchedRecords = false;
 
 if ($nameFilter != '' || $descriptionFilter != '') {
-  $filteredGroups =  $controller->filter($nameFilter , $descriptionFilter);
-  if(count($filteredGroups) == 0){
-    $noMatchedRecords =true;
-  }
-  
-  $groups = $filteredGroups;
+    $filteredGroups =  $controller->filter($nameFilter, $descriptionFilter);
+    if (count($filteredGroups) == 0) {
+        $noMatchedRecords = true;
+    }
+
+    $groups = $filteredGroups;
 }
 
 
 ?>
 <div class="p-3">
 
-<!-- filters -->
-<form class ="d-flex align-items-end" method="POST" enctype='multipart/form-data'>
-                <!-- <div class="m-3">
-                    <label for="groupFilter" class="form-label">Filter by Group Name:</label>
-                    <select class="form-select" name="groupFilter" id="groupFilter">
-                        <option value="all">All Groups</option>
-                        <?php foreach ($groups as $group) { ?>
-                           <option value="<?= $group['id'] ?>"><?= $group['name'] ?></option>
-                        <?php } ?>
-                    </select>
-                </div> -->
-                 
-                <div class="m-3">
-                    <label for="nameFilter" class="form-label">Search by Group Name: </label>
-                    <input type="text" class="form-control" name="nameFilter" id="nameFilter" placeholder="Enter Name">
-                </div>
+    <!-- filters -->
+    <form class="d-flex align-items-end" method="POST" enctype='multipart/form-data'>
+        <div class="m-3">
+            <label for="nameFilter" class="form-label">Search by Group Name: </label>
+            <input type="text" class="form-control" name="nameFilter" id="nameFilter" placeholder="Enter Name">
+        </div>
 
-                <div class="m-3">
-                    <label for="descriptionFilter" class="form-label">Search by Group Description:</label>
-                    <input type="text" class="form-control" name="descriptionFilter" id="descriptionFilter" placeholder="Enter Description">
-                </div>
-                <button style="height: 50%;" type="submit" class="btn btn-primary">Apply Filters</button>
-            </form>
-            <?php 
-              if($noMatchedRecords){
-               echo "<div class='alert alert-warning' role='alert'>There's no Matched Records</div>";
-              }
-            ?>
+        <div class="m-3">
+            <label for="descriptionFilter" class="form-label">Search by Group Description:</label>
+            <input type="text" class="form-control" name="descriptionFilter" id="descriptionFilter" placeholder="Enter Description">
+        </div>
+        <button style="height: 50%;" type="submit" class="btn btn-primary">Apply Filters</button>
+    </form>
+    <?php
+    if ($noMatchedRecords) {
+        echo "<div class='alert alert-warning' role='alert'>There's no Matched Records</div>";
+    }
+    ?>
 
-      <!-- create group        -->
+    <!-- create group        -->
     <button class="btn btn-primary"> <a style="text-decoration: none; color:white" href="../views/createGroup.php"> Create New Group</a></button>
 
     <!-- table of all groups -->
@@ -79,15 +68,17 @@ if ($nameFilter != '' || $descriptionFilter != '') {
                 echo "<th >" . $group['description'] . "</th>";
 
                 echo "<th>";
-                echo '<a class="btn" href="../views/usersOfAGroup.php?groupId='.$group['id'].'">
+                echo '<a class="btn" href="../views/usersOfAGroup.php?groupId=' . $group['id'] . '">
                         <i class="fa fa-eye text-black"></i>
                     </a>';
-                echo '<a class="btn" href="../views/editGroup.php?groupId=' . $group['id'] . '">
+                if ($_SESSION['group_name'] == 'Admins') {
+                    echo '<a class="btn" href="../views/editGroup.php?groupId=' . $group['id'] . '">
                         <i class="fa fa-edit text-primary"></i>
                     </a>';
-                echo '<a class="btn" href="../views/deleteGroup.php?groupId='.$group['id'] . '">
+                    echo '<a class="btn" href="../views/deleteGroup.php?groupId=' . $group['id'] . '">
                         <i class="fa fa-close text-danger"></i>
                     </a>';
+                }
 
                 echo "</th>";
 
@@ -99,4 +90,3 @@ if ($nameFilter != '' || $descriptionFilter != '') {
     </table>
 
 </div>
-

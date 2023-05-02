@@ -15,8 +15,7 @@
 
         ?>
         <div class="p-3">
-            <button class="btn btn-success"> <a style="text-decoration: none; color:white"
-                    href="../views/createUser.php">
+            <button class="btn btn-success"> <a style="text-decoration: none; color:white" href="../views/createUser.php">
                     Create New User</a></button>
 
             <form method="POST">
@@ -26,14 +25,13 @@
                         <select class="form-select" name="groupFilter" id="groupFilter">
                             <option value="all">All Groups</option>
                             <?php foreach ($groups as $group) { ?>
-                            <option value="<?= $group['id'] ?>"><?= $group['name'] ?></option>
+                                <option value="<?= $group['id'] ?>"><?= $group['name'] ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="mb-3 col-4">
                         <label for="searchFilter" class="form-label">Search by Name:</label>
-                        <input type="text" class="form-control" name="searchFilter" id="searchFilter"
-                            placeholder="Enter name">
+                        <input type="text" class="form-control" name="searchFilter" id="searchFilter" placeholder="Enter name">
                     </div>
                     <div class="col-3 offset-md-1 align-self-end">
                         <button type="submit" class="btn  btn-outline-primary ">
@@ -60,7 +58,7 @@
                 <tbody class="table-group-divider">
                     <?php
                     if (empty($users)) {
-                        echo "<tr><td colspan='7'>No users found</td></tr>";
+                        echo "<div class='alert alert-warning' role='alert'>There's no Matched Records</div>";
                     } else {
                         foreach ($users as $user) {
                             echo "  <tr>";
@@ -75,12 +73,14 @@
                             echo '<a class="btn" href="../views/profile.php?userid=' . $user['UserID'] . '">
                         <i class="fa fa-eye text-black"></i>
                     </a>';
-                            echo '<a class="btn" href="../views/editUser.php?userid=' . $user['UserID'] . '">
+                            if ($_SESSION['group_name'] == 'Admins') {
+                                echo '<a class="btn" href="../views/editUser.php?userid=' . $user['UserID'] . '">
                         <i class="fa fa-edit text-primary"></i>
                     </a>';
-                            echo '<a class="btn" href="../views/deleteUser.php?userid=' . $user['UserID'] . '">
+                                echo '<a class="btn" href="../views/deleteUser.php?userid=' . $user['UserID'] . '">
                         <i class="fa fa-close text-danger"></i>
                     </a>';
+                            }
 
                             echo "</th>";
 

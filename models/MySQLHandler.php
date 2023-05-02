@@ -198,7 +198,7 @@ class MySQLHandler implements DBHandler
     public function soft_delete($table, $id)
     {
         $this->sql = "UPDATE `$table` SET `is_deleted` = 1 WHERE  `id` = $id";
-         $this->execute();
+        $this->execute();
         return $this;
     }
     private function debug($sql)
@@ -318,8 +318,6 @@ class MySQLHandler implements DBHandler
     {
         // print_r($this->sql);
         // die;
-        $this->debug($this->sql);
-
         $this->query = mysqli_query($this->conn, $this->sql);
         if (mysqli_affected_rows($this->conn) > 0) {
             return true;
@@ -327,10 +325,21 @@ class MySQLHandler implements DBHandler
             return false;
         }
     }
+
+    public function query($sql, $params = [])
+    {
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt;
+    }
     public function fetchAll($sql, $params = [])
     {
         $stmt = $this->pdo->prepare($sql);
         $stmt->query($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function filter_groups($qry)
+    {
+        return $this->get_results($qry);
     }
 }
