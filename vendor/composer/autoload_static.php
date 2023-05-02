@@ -6,36 +6,42 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit9228bb22e28b840ae1376a6adbaa5099
 {
-    public static $files = array (
+    public static $files = array(
         'cc88c44bb43cee8e04d52bf70e6fa770' => __DIR__ . '/../..' . '/config/DBconfig.php',
+        'b515b0219338af3e075d50cfef4ed646' => __DIR__ . '/../..' . '/config/validationConfig.php',
         '488a2829fc4417163e1a5ff71d6f2674' => __DIR__ . '/../..' . '/utils/HelperMethods.php',
     );
 
-    public static $prefixLengthsPsr4 = array (
-        'P' => 
-        array (
+    public static $prefixLengthsPsr4 = array(
+        'P' =>
+        array(
             'Pc\\ArticlesWebsite\\' => 19,
         ),
     );
 
-    public static $prefixDirsPsr4 = array (
-        'Pc\\ArticlesWebsite\\' => 
-        array (
+    public static $prefixDirsPsr4 = array(
+        'Pc\\ArticlesWebsite\\' =>
+        array(
             0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
-    public static $classMap = array (
+    public static $classMap = array(
+        'ArticleController' => __DIR__ . '/../..' . '/controllers/ArticleController.php',
+        'ArticleFormValidation' => __DIR__ . '/../..' . '/utils/ArticleFormValidation.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'ContainFilter' => __DIR__ . '/../..' . '/models/containFilter.php',
-        'Core\\Router' => __DIR__ . '/../..' . '/config/Router.php',
         'DBHandler' => __DIR__ . '/../..' . '/models/DBHandler.php',
         'GroupController' => __DIR__ . '/../..' . '/controllers/GroupController.php',
         'GroupFromValidation' => __DIR__ . '/../..' . '/utils/GroupFormValidation.php',
         'HelperMethods' => __DIR__ . '/../..' . '/utils/HelperMethods.php',
         'HomeController' => __DIR__ . '/../..' . '/controllers/HomeController.php',
+        'Logger' => __DIR__ . '/../..' . '/config/Logger.php',
         'MySQLHandler' => __DIR__ . '/../..' . '/models/MySQLHandler.php',
+        'ProfileController' => __DIR__ . '/../..' . '/controllers/profieController.php',
+        'UserController' => __DIR__ . '/../..' . '/controllers/UserController.php',
         'UserFromValidation' => __DIR__ . '/../..' . '/utils/UserFormValidation.php',
+        'config\\Router' => __DIR__ . '/../..' . '/config/Router.php',
         'filter_interface' => __DIR__ . '/../..' . '/models/filter_interface.php',
     );
 
@@ -45,7 +51,6 @@ class ComposerStaticInit9228bb22e28b840ae1376a6adbaa5099
             $loader->prefixLengthsPsr4 = ComposerStaticInit9228bb22e28b840ae1376a6adbaa5099::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit9228bb22e28b840ae1376a6adbaa5099::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit9228bb22e28b840ae1376a6adbaa5099::$classMap;
-
         }, null, ClassLoader::class);
     }
 }

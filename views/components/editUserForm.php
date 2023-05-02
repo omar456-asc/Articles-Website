@@ -1,46 +1,27 @@
 <?php
-// if (isset($_GET['userid'])) {
+$groupsController = new GroupController();
+$groups = $groupsController->index();
 
+$userscontroller = new UserController();
 $userid = intval($_GET['userid']);
-$db = new MySQLHandler("users", 'UserID');
-$user_data = $db->select('users', "*")
-    ->join('groups', 'users.GroupID', '=', "groups.id")
-    ->where('UserId', '=', $userid)
-    ->getOne();
-$groups = $db->select("groups", "id,name")->getAll();
-// }
-// var_dump($user_data);
+$user_data = $userscontroller->show($userid);
+$id = $user_data['UserID'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateUser'])) {
-    // var_dump($_POST);
-
-    require_once('../utils/UserFormValidation.php');
-
-    $userName = $_POST['username'];
-    $email = $_POST['useremail'];
-    $password = $_POST['password'];
-    $firstName = $_POST['firstname'];
-    $lastName = $_POST['lastname'];
-    $phoneNumber = $_POST['phone'];
-    $group = $_POST['group'];
-    $userImg['name'] = $user_data['avatar'];
-
-    $validateUser = new UserFromValidation(
-        $userName,
-        $email,
-        $password,
-        $firstName,
-        $lastName,
-        $phoneNumber,
-        $group,
-        $userImg
-    );
-    $errors = $validateUser->get_errors();
-    $userData = $validateUser->get_create_user_data();
-
-    $db->update($userData, $userid);
-    HelperMethods::alert_massege('success', "User Updated successfully");
+    $msg =   $userscontroller->update($userid, $user_data);
+    //var_dump($msg);
+    if (is_array($msg)) {
+        foreach ($msg as $error) {
+            HelperMethods::alert_massege('danger', $error);
+        }
+    } else {
+        HelperMethods::alert_massege('success ', $msg);
+    }
 }
+$user_data = $userscontroller->show($userid);
+
+
+
 
 
 ?>
@@ -79,8 +60,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateUser'])) {
         <input type="email" class="form-control" id="email-input" name="useremail" value="<?= $user_data['Email'] ?>">
     </div>
     <div class="form-group">
-        <label for="email-input">Phone</label>
-        <input type="text" class="form-control" id="email-input" name="phone" value="<?= $user_data['Phone'] ?>">
+        <label for="phone-input">Phone</label>
+        <input type="text" class="form-control" id="phone-input" name="phone" value="<?= $user_data['Phone'] ?>">
     </div>
     <div class="form-group">
         <label for="group" class="m-auto col-md-3 ">Group : </label>
