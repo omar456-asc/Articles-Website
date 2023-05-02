@@ -23,10 +23,10 @@ $articles= $Artcontroller->index();
                 <tr>
                 <th scope='row'><?= $article['id'] ?> </th>
                 <th ><?= $article['title'] ?> </th>
-                <th style="width: 15em; max-width: 15em; overflow: hidden; text-overflow: ellipsis;"> <?= $article['summary'] ?></th>
+                <th style="width: 10em; max-width: 10em; overflow: hidden; text-overflow: ellipsis;"> <?= $article['summary'] ?></th>
                 <th ><?= $article['image'] ?></th>
-                <th style="width: 15em; max-width: 15em; overflow: hidden; text-overflow: ellipsis;"><?= $article['full_article'] ?></th>
-                <th ><?= $article['publishing_date']?></th>
+                <th style="width: 10em; max-width: 10em; overflow: hidden; text-overflow: ellipsis;"><?= $article['full_article'] ?></th>
+                <th style="width: 10em; max-width: 10em; overflow: hidden; text-overflow: ellipsis;"><?= date('F j, Y, g:i a',strtotime( $article['publishing_date']))?></th>
 
                 <th>
                 <a class="btn" <?="href='../views/Showarticle.php?ArticleId={$article['id']}' ";?>>

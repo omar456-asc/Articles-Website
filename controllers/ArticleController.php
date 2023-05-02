@@ -16,12 +16,11 @@ class ArticleController{
     }
     public function store()
     {
-        //$timestamp = strtotime(date('Y-m-d H:i:s'));
+        
         $title = $_POST['title'];
         $summary = $_POST['summary'];
         $articleImg = $_FILES['image'];
         $full_article = $_POST['full_article'];
-        //$publising_date = strtotime($_POST[date('Y-m-d H:i:s')]);
         $user_id = $_POST['user_id'];
 
         $validateArticle = new ArticleFormValidation(
