@@ -94,23 +94,23 @@ class UserController
     }
     public function delete($userID)
     {
-
-
         $this->db->updateDB('users', ['IsDeleted' => '1'])
             ->where('UserID', '=', $userID)
             ->execute();
         $page = $_SERVER['PHP_SELF'];
-
-        // echo '<script type="text/javascript">';
-        // echo 'window.location.href = "../views/users.php";';
-        // echo '</script>';
     }
     public function show($userID)
     {
+
         $user = $this->db->select('users', '*')
             ->join('groups', 'users.GroupID', '=', "groups.id")
             ->where('UserID', '=', $userID)
             ->getOne();
+        if (!$user) {
+            $result = HelperMethods::alert_massege('danger', 'User Not Found');
+            echo $result;
+            die;
+        }
         return $user;
     }
     public function filter()

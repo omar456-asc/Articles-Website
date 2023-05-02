@@ -17,6 +17,11 @@ class ProfileController
             ->join('groups', 'users.GroupID', '=', "groups.id")
             ->where('UserID', '=', $this->user_id)
             ->getOne();
+        if (!$user) {
+            $result = HelperMethods::alert_massege('danger', 'User Not Found');
+            echo $result;
+            die;
+        }
         return $user;
     }
     public function getUserArticles()

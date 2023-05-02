@@ -9,7 +9,7 @@ class GroupFromValidation
     private $groupIcon;
 
     private $generatedImgName;
-   
+
 
     public function __construct($groupName, $groupDescription, $groupIcon)
     {
@@ -17,7 +17,6 @@ class GroupFromValidation
         $this->groupName = $groupName ? $groupName : "";
         $this->groupDescription = $groupDescription ? $groupDescription : "";
         $this->groupIcon = $groupIcon ? $groupIcon : "";
-       
     }
 
     private function validate_groupName($groupName)
@@ -32,26 +31,19 @@ class GroupFromValidation
     {
         if (empty($groupDescription)) {
             array_push($this->errors, "Group DescriptionCan't Be Empty");
-        }
-        elseif (strlen($groupDescription) > MAX_GROUP_DESCRIPTION_LENGTH) {
+        } elseif (strlen($groupDescription) > MAX_GROUP_DESCRIPTION_LENGTH) {
             array_push($this->errors, "Group Description Should Be Less than " . MAX_GROUP_DESCRIPTION_LENGTH . " characters");
-        }
-        elseif(strlen($groupDescription) < MIN_GROUP_DESCRIPTION_LENGTH)
-        {
+        } elseif (strlen($groupDescription) < MIN_GROUP_DESCRIPTION_LENGTH) {
             array_push($this->errors, "Group Description Should Be More Than " . MIN_GROUP_DESCRIPTION_LENGTH . " characters");
         }
-      
     }
- 
-    
- 
+
+
+
     private function validate_creating_group()
     {
         $this->validate_groupName($this->groupName);
         $this->validate_groupDescription($this->groupDescription);
-    
-        //$this->validate_groupImage($this->groupIcon);
-        // return $this->;
     }
     public function get_errors()
     {

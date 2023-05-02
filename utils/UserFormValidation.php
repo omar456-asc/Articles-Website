@@ -100,7 +100,6 @@ class UserFromValidation
         $this->validate_lastname($this->lastName);
         $this->validate_groupID($this->groupID);
         $this->validate_userimage($this->userImg);
-        // return $this->;
     }
     public function get_errors()
     {

@@ -1,6 +1,6 @@
 <?php
 require_once("../vendor/autoload.php");
-$title = "Users-Groups";
+$title = "Groups";
 require_once('components/header.php');
 
 require_once('components/authMiddleware.php');

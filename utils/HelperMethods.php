@@ -35,7 +35,6 @@ class HelperMethods
         // Check if image file is a actual image or fake image
         $check = getimagesize($file["tmp_name"]);
         if ($check !== false) {
-            //echo "File is an image - " . $check["mime"] . ".";
             $uploadOk = 1;
         } else {
             return "File is not an image.";
