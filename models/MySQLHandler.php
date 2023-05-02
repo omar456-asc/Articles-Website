@@ -195,6 +195,12 @@ class MySQLHandler implements DBHandler
         }
     }
 
+    public function soft_delete($table, $id)
+    {
+        $this->sql = "UPDATE `$table` SET `is_deleted` = 1 WHERE  `id` = $id";
+         $this->execute();
+        return $this;
+    }
     private function debug($sql)
     {
         if (__Debug__Mode__ === 1)
@@ -321,7 +327,6 @@ class MySQLHandler implements DBHandler
             return false;
         }
     }
-
     public function fetchAll($sql, $params = [])
     {
         $stmt = $this->pdo->prepare($sql);

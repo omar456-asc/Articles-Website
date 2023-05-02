@@ -1,9 +1,10 @@
 <?php
-
-$db = new MySQLHandler("articles");
-$articles = $db->select('articles', "*")->getALL();
+require_once('../controllers/ArticleController.php');
+$Artcontroller = new ArticleController();
+$articles= $Artcontroller->index();
 ?>
 <div class="p-3">
+<button class="btn btn-primary"> <a style="text-decoration: none; color:white" href="../views/addArticle.php"> Add Article</a></button>
     <table class=" table ">
         <thead>
             <tr>
@@ -22,16 +23,16 @@ $articles = $db->select('articles', "*")->getALL();
                 <tr>
                 <th scope='row'><?= $article['id'] ?> </th>
                 <th ><?= $article['title'] ?> </th>
-                <th style="width: 20em; max-width: 20em; overflow: hidden; text-overflow: ellipsis;"> <?= $article['summary'] ?></th>
+                <th style="width: 10em; max-width: 10em; overflow: hidden; text-overflow: ellipsis;"> <?= $article['summary'] ?></th>
                 <th ><?= $article['image'] ?></th>
-                <th style="width: 20em; max-width: 20em; overflow: hidden; text-overflow: ellipsis;"><?= $article['full_article'] ?></th>
-                <th ><?= $article['publishing_date']?></th>
+                <th style="width: 10em; max-width: 10em; overflow: hidden; text-overflow: ellipsis;"><?= $article['full_article'] ?></th>
+                <th style="width: 10em; max-width: 10em; overflow: hidden; text-overflow: ellipsis;"><?= date('F j, Y, g:i a',strtotime( $article['publishing_date']))?></th>
 
                 <th>
                 <a class="btn" <?="href='../views/Showarticle.php?ArticleId={$article['id']}' ";?>>
                         <i class="fa fa-eye text-black"></i>
                     </a>
-                <a class="btn" href="">
+                <a class="btn" <?="href='../views/deleteArticle.php?ArticleId={$article['id']}' ";?>>
                         <i class="fa fa-close text-danger"></i>
                     </a>
 
