@@ -19,7 +19,7 @@ $formattedDate = date('F j, Y, g:i a', $timestamp);
                 <div class="card-body">
                     <div class="text-center">
                         <?php
-                            echo"<img style='width:50%;height:50%;' src='../../assets/img/articles/".$article['image']."'/>";  
+                            echo"<img style='width:50%;height:50%;' src='../assets/img/articles/".$article['image']."'/>";  
                     
                         ?>
                        
