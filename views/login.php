@@ -34,7 +34,6 @@ function validate_form()
         $db = new MySQLHandler("users");
 
 
-        //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 
 
